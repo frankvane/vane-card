@@ -21,6 +21,7 @@ import HorizontalLayout from "./pages/CardPlugin/layouts/HorizontalLayout";
 import LeftRightCompound from "./pages/CardPlugin/compound/LeftRightCompound";
 import MinimalLayout from "./pages/CardPlugin/layouts/MinimalLayout";
 import PluginEnhancedCompound from "./pages/CardPlugin/compound/PluginEnhancedCompound";
+import EcommerceSKUCompound from "./pages/CardPlugin/compound/EcommerceSKUCompound";
 import React from "react";
 import RightImageLayout from "./pages/CardPlugin/layouts/RightImageLayout";
 import TopBottomCompound from "./pages/CardPlugin/compound/TopBottomCompound";
@@ -73,6 +74,7 @@ const App: React.FC = () => {
             <NavLink to="/compound/left-right">左右布局</NavLink>
             <NavLink to="/compound/top-bottom">上下布局</NavLink>
             <NavLink to="/compound/enhanced">增强：复合组件+插件</NavLink>
+            <NavLink to="/compound/ecommerce-sku">电商增强 + SKU</NavLink>
           </div>
         </nav>
       </aside>
@@ -133,6 +135,7 @@ const App: React.FC = () => {
           />
           <Route path="/compound/left-right" element={<LeftRightCompound />} />
           <Route path="/compound/top-bottom" element={<TopBottomCompound />} />
+          <Route path="/compound/ecommerce-sku" element={<EcommerceSKUCompound />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

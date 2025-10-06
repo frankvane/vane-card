@@ -2,15 +2,16 @@
  * 插槽示例：Responsive（响应式布局与样式联动）
  */
 
-import React from "react";
-import DemoPage from "../_layout/DemoPage";
 import {
   CardCore,
-  withPlugins,
-  createImagePlugin,
   createHoverPlugin,
+  createImagePlugin,
   createResponsivePlugin,
+  withPlugins,
 } from "../../../components/CardPlugin";
+
+import DemoPage from "../_layout/DemoPage";
+import React from "react";
 
 interface ProductData {
   id: string;

@@ -34,6 +34,7 @@ const routeToFileMap: Record<string, string> = {
   "/compound/enhanced": "compound/PluginEnhancedCompound",
   "/compound/left-right": "compound/LeftRightCompound",
   "/compound/top-bottom": "compound/TopBottomCompound",
+  "/compound/ecommerce-sku": "compound/EcommerceSKUCompound",
   "/slots/responsive": "slots/ResponsiveSlots",
   "/slots/gallery-video": "slots/GalleryVideoSlots",
 };
@@ -70,6 +71,7 @@ const fileLoaderMap: Record<string, () => Promise<{ default: string }>> = {
     import("../compound/PluginEnhancedCompound.tsx?raw"),
   "compound/LeftRightCompound": () => import("../compound/LeftRightCompound.tsx?raw"),
   "compound/TopBottomCompound": () => import("../compound/TopBottomCompound.tsx?raw"),
+  "compound/EcommerceSKUCompound": () => import("../compound/EcommerceSKUCompound.tsx?raw"),
   "slots/ResponsiveSlots": () => import("../slots/ResponsiveSlots.tsx?raw"),
   "slots/GalleryVideoSlots": () => import("../slots/GalleryVideoSlots.tsx?raw"),
 };
