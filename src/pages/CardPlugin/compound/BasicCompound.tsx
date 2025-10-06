@@ -19,6 +19,15 @@ const mockProductA = {
   rating: 4.6,
   ratingCount: 1287,
   inventory: 3,
+  // 新增用于展示的数据
+  features: ["轻量鞋身", "缓震中底", "透气网面"],
+  specs: { 材质: "网面+EVA", 鞋底: "橡胶", 产地: "中国" },
+  sku: "SKU-SPORT-1001",
+  badges: ["热卖", "限时折扣", "正品保障"],
+  weight: 0.35, // kg，用于单价显示
+  colors: ["#1e90ff", "#ff4757", "#2ed573"],
+  sizes: ["38", "39", "40", "41", "42"],
+  variants: { 尺码: ["38", "39", "40"], 颜色: ["蓝", "红", "绿"] },
 };
 
 const BasicCompound: React.FC = () => {
@@ -27,29 +36,71 @@ const BasicCompound: React.FC = () => {
       title="基础：复合组件"
       description="使用 ProductCard.* 子组件直接构建卡片结构，无插件。"
     >
-      <div className="card" style={{ padding: 12 }}>
+      <div className="card" style={{ padding: 16, borderRadius: 12, boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
         <ProductCard productId={mockProductA.id} data={mockProductA}>
-          <ProductCard.Image style={{ width: "100%", aspectRatio: "1 / 1", borderRadius: 8 }} />
-          <div style={{ padding: 12 }}>
-            <ProductCard.Badge />
-            <ProductCard.Title />
-            <ProductCard.Subtitle />
-            <ProductCard.Description />
-            <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-              <ProductCard.Price />
-              <ProductCard.OldPrice />
-              <ProductCard.Discount />
+          <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: 16 }}>
+            <ProductCard.Image style={{ width: 280, height: 280, borderRadius: 12, objectFit: "cover" }} />
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <ProductCard.Badge />
+                <ProductCard.Title />
+              </div>
+              <ProductCard.Subtitle style={{ color: "#666" }} />
+              <ProductCard.Description style={{ marginTop: 8, color: "#444" }} />
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 10 }}>
+                <ProductCard.FeatureList />
+                <ProductCard.SpecsTable />
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
+                <ProductCard.SKUCode />
+                <ProductCard.BadgeGroup />
+              </div>
+
+              <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginTop: 10 }}>
+                <ProductCard.Price />
+                <ProductCard.OldPrice />
+                <ProductCard.Discount />
+              </div>
+              <ProductCard.PricePerUnit unitLabel="元/公斤" />
+
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 6 }}>
+                <ProductCard.Tags />
+                <ProductCard.Brand />
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                <ProductCard.Shipping />
+                <ProductCard.Warranty />
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                <ProductCard.Rating />
+                <ProductCard.Inventory />
+              </div>
+
+              <ProductCard.Section title="选择属性" />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <ProductCard.ColorSwatches />
+                <ProductCard.SizeSelector />
+                <ProductCard.OptionPicker name="材质" options={["网面", "皮革", "织物"]} />
+                <ProductCard.VariantSelector />
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
+                <span style={{ color: "#666", fontSize: 13 }}>数量：</span>
+                {/* 不传 available：由 QuantityStepper 自动从 data.inventory 或选中变体推断 */}
+                <ProductCard.QuantityStepper />
+              </div>
+
+              <div style={{ marginTop: 12 }}>
+                <ProductCard.SelectedInfo />
+              </div>
+
+              <ProductCard.Divider />
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
+                <ProductCard.Actions />
+              </div>
             </div>
-            <ProductCard.Tags />
-            <ProductCard.Brand />
-            <ProductCard.Shipping />
-            <ProductCard.Warranty />
-            <ProductCard.Rating />
-            <ProductCard.Inventory />
-          </div>
-          <ProductCard.Divider />
-          <div style={{ padding: 12 }}>
-            <ProductCard.Actions />
           </div>
         </ProductCard>
       </div>

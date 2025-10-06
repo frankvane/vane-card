@@ -6,6 +6,8 @@ import type { CardPlugin } from "../plugins";
 export type ProductCardState = {
   cart: Record<string, number>;
   wishlist: Record<string, boolean>;
+  attributes?: Record<string, string>; // 选中的SKU属性（如颜色/尺码）
+  quantity?: number; // 购买数量
 };
 
 export type ProductCardContextValue = {
@@ -42,7 +44,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   containerStyle,
   children,
 }) => {
-  const [state, setState] = useState<ProductCardState>({ cart: {}, wishlist: {} });
+  const [state, setState] = useState<ProductCardState>({ cart: {}, wishlist: {}, attributes: {}, quantity: 1 });
 
   const ctxValue = useMemo<ProductCardContextValue>(
     () => ({ productId, data, state, setState }),

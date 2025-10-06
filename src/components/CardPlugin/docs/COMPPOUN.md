@@ -115,3 +115,35 @@ query: Check pages/CardPlugin to see existing demos and where to add a new demo 
 
 **总结**
 - 本次改造以“新增目录与文件 + 入口导出补齐 + 文档与示例扩展”为主，不动现有插件管理与生命周期执行逻辑。复合组件承担“结构与内容表达”，插件继续承担“通用行为与装饰”，两者可在同一组件中自然协作，实现易用与扩展性的兼顾。
+
+
+我已快速审阅现有复合子组件，基于当前实现提出可扩展的子组件清单，按功能分类，避免重复并覆盖常见电商场景。
+**已扩展子组件**
+
+- 数据展示：`SpecsTable`（规格参数表）、`FeatureList`（卖点列表）、`SKUCode`（货号/条码）、`BadgeGroup`（多徽章叠加）、`PricePerUnit`（单价/每100g）。
+
+- 交互选择：`ColorSwatches`（颜色圆点选择）、`SizeSelector`（尺码选择）、`VariantSelector`（多维度SKU选择）、`QuantityStepper`（数量步进器）、`OptionPicker`（通用属性选择）。
+
+**可扩展方向**
+
+
+- 价格与促销：`Savings`（节省金额：旧价-现价）、`CouponEntry`（优惠券输入/选择）、`Installments`（分期信息）、`LimitedTime`（限时文案条）、`Countdown`（倒计时）。
+- 物流与服务：`DeliveryETA`（预计到达时间）、`StorePickup`（自提点信息）、`FreeShippingBadge`（包邮标识）、`ReturnPolicy`（退换政策）、`ServiceIcons`（客服/维修/上门等）。
+- 信任与社交：`SellerInfo`（商家信息）、`GuaranteeMarks`（正品/发票/极速退）、`RatingBreakdown`（评分分布）、`ReviewSnippet`（精选评价摘要）、`ShareButtons`（分享入口）。
+- 布局与结构：`Grid`（网格区块）、`Columns`（多列容器）、`Stack`（纵向间距容器）、`Spacer`（占位间隔）、`MediaObject`（图文并排预设）。
+- 状态与占位：`Skeleton`（加载骨架）、`ErrorState`（错误占位）、`EmptyState`（空态）、`LoadingSpinner`（局部加载）。
+- 媒体增强：`ImageCarousel`（图片轮播）、`Video`（商品视频）、`LazyImage`（懒加载+失败回退）、`Overlay`（图片遮罩层）。
+
+**设计准则**
+- 统一模式：从 `ProductCard` 上下文读取数据，支持 props 覆盖；无数据时优雅降级。
+- 低耦合：只负责自身渲染与交互，布局由页面容器控制（如 `flex/grid`）。
+- 轻状态：需要跨子组件联动时，扩展 `ProductCard.state` 与 `setState`（如 `VariantSelector`、`QuantityStepper`）。
+- 样式简约：提供 `className/style`，避免强绑定主题；必要时暴露关键小型样式钩子。
+
+**优先实现建议（可立刻开工）**
+- `QuantityStepper`：增减数量并写入 `state.cart[productId]`。
+- `ColorSwatches` + `SizeSelector`：选择SKU属性，写入 `state` 并驱动价格/库存联动。
+- `FeatureList`：卖点条目（图标+文案），用于 TopBottom/LeftRight 布局丰富信息区。
+- `Countdown`：促销倒计时，结束后自动切换到普通状态。
+
+如果你认可，我可以先在 `compound/components` 中实现以上 3–4 个组件，并在 `BasicCompound` 或 `LeftRightCompound` 中加入演示，保持与现有模式一致。

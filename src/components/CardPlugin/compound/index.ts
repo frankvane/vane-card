@@ -17,6 +17,17 @@ import { Brand } from "./components/Brand";
 import { Shipping } from "./components/Shipping";
 import { Warranty } from "./components/Warranty";
 import { Divider } from "./components/Divider";
+import { FeatureList } from "./components/FeatureList";
+import { SpecsTable } from "./components/SpecsTable";
+import { SKUCode } from "./components/SKUCode";
+import { BadgeGroup } from "./components/BadgeGroup";
+import { PricePerUnit } from "./components/PricePerUnit";
+import { QuantityStepper } from "./components/QuantityStepper.tsx";
+import { OptionPicker } from "./components/OptionPicker";
+import { ColorSwatches } from "./components/ColorSwatches";
+import { SizeSelector } from "./components/SizeSelector";
+import { VariantSelector } from "./components/VariantSelector";
+import { SelectedInfo } from "./components/SelectedInfo";
 
 // 为复合组件定义带静态子组件的类型，解决 TS 下的 "FC<ProductCardProps> 上不存在属性 Image" 问题
 export type ProductCardCompound = React.FC<import("./ProductCard").ProductCardProps> & {
@@ -37,6 +48,17 @@ export type ProductCardCompound = React.FC<import("./ProductCard").ProductCardPr
   Shipping: typeof Shipping;
   Warranty: typeof Warranty;
   Divider: typeof Divider;
+  FeatureList: typeof FeatureList;
+  SpecsTable: typeof SpecsTable;
+  SKUCode: typeof SKUCode;
+  BadgeGroup: typeof BadgeGroup;
+  PricePerUnit: typeof PricePerUnit;
+  QuantityStepper: typeof QuantityStepper;
+  OptionPicker: typeof OptionPicker;
+  ColorSwatches: typeof ColorSwatches;
+  SizeSelector: typeof SizeSelector;
+  VariantSelector: typeof VariantSelector;
+  SelectedInfo: typeof SelectedInfo;
 };
 
 // 构建并导出带静态子组件的复合组件实例
@@ -58,6 +80,17 @@ export const ProductCard: ProductCardCompound = ProductCardMain as unknown as Pr
 (ProductCard as any).Shipping = Shipping;
 (ProductCard as any).Warranty = Warranty;
 (ProductCard as any).Divider = Divider;
+(ProductCard as any).FeatureList = FeatureList;
+(ProductCard as any).SpecsTable = SpecsTable;
+(ProductCard as any).SKUCode = SKUCode;
+(ProductCard as any).BadgeGroup = BadgeGroup;
+(ProductCard as any).PricePerUnit = PricePerUnit;
+(ProductCard as any).QuantityStepper = QuantityStepper;
+(ProductCard as any).OptionPicker = OptionPicker;
+(ProductCard as any).ColorSwatches = ColorSwatches;
+(ProductCard as any).SizeSelector = SizeSelector;
+(ProductCard as any).VariantSelector = VariantSelector;
+(ProductCard as any).SelectedInfo = SelectedInfo;
 
 // 类型导出
 export type { ProductCardProps, ProductCardContextValue, ProductCardState } from "./ProductCard";
@@ -78,3 +111,14 @@ export type { BrandProps } from "./components/Brand";
 export type { ShippingProps } from "./components/Shipping";
 export type { WarrantyProps } from "./components/Warranty";
 export type { DividerProps } from "./components/Divider";
+export type { FeatureListProps } from "./components/FeatureList";
+export type { SpecsTableProps } from "./components/SpecsTable";
+export type { SKUCodeProps } from "./components/SKUCode";
+export type { BadgeGroupProps } from "./components/BadgeGroup";
+export type { PricePerUnitProps } from "./components/PricePerUnit";
+export type { QuantityStepperProps } from "./components/QuantityStepper.tsx";
+export type { OptionPickerProps } from "./components/OptionPicker";
+export type { ColorSwatchesProps } from "./components/ColorSwatches";
+export type { SizeSelectorProps } from "./components/SizeSelector";
+export type { VariantSelectorProps } from "./components/VariantSelector";
+export type { SelectedInfoProps } from "./components/SelectedInfo";
