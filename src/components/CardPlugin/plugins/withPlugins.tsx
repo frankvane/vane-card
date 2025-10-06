@@ -216,11 +216,26 @@ export function withPlugins<T = any>(
             .catch(() => {});
         },
 
-        // 子元素
+        // 子元素 + 插件渲染区域（支持位置与顺序控制）
         children: (
           <>
+            {/* 头部内容：在 children 之前的 Header */}
+            {plugins
+              .filter((p) => p.hooks.renderHeader && p.config?.headerPosition === "before")
+              .sort((a, b) => (a.config?.order ?? 0) - (b.config?.order ?? 0))
+              .map((plugin, idx) => {
+                const header = plugin.hooks.renderHeader?.(pluginContext);
+                if (!header) return null;
+                return (
+                  <React.Fragment key={`plugin-header-before-${plugin.name}-${idx}`}>
+                    {header}
+                  </React.Fragment>
+                );
+              })}
+
             {transformedProps.children}
-            {/* 插件渲染的覆盖层 */}
+
+            {/* 插件渲染的覆盖层（通常为绝对定位叠加），保留在 children 之后 */}
             {plugins.map((plugin, idx) => {
               const overlay = plugin.hooks.renderOverlay?.(pluginContext);
               if (!overlay) return null;
@@ -230,16 +245,21 @@ export function withPlugins<T = any>(
                 </React.Fragment>
               );
             })}
-            {/* 插件渲染的头部 */}
-            {plugins.map((plugin, idx) => {
-              const header = plugin.hooks.renderHeader?.(pluginContext);
-              if (!header) return null;
-              return (
-                <React.Fragment key={`plugin-header-${plugin.name}-${idx}`}>
-                  {header}
-                </React.Fragment>
-              );
-            })}
+
+            {/* 头部内容：在 children 之后的 Header（默认） */}
+            {plugins
+              .filter((p) => p.hooks.renderHeader && p.config?.headerPosition !== "before")
+              .sort((a, b) => (a.config?.order ?? 0) - (b.config?.order ?? 0))
+              .map((plugin, idx) => {
+                const header = plugin.hooks.renderHeader?.(pluginContext);
+                if (!header) return null;
+                return (
+                  <React.Fragment key={`plugin-header-after-${plugin.name}-${idx}`}>
+                    {header}
+                  </React.Fragment>
+                );
+              })}
+
             {/* 插件渲染的底部 */}
             {plugins.map((plugin, idx) => {
               const footer = plugin.hooks.renderFooter?.(pluginContext);

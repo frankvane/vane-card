@@ -1,11 +1,18 @@
-import React from "react";
-import DemoPage from "../_layout/DemoPage";
 import {
   ProductCard,
-  createHoverPlugin,
+  createA11yPlugin,
   createAnimationPlugin,
   createBadgePlugin,
+  createGalleryPlugin,
+  createHoverPlugin,
+  createInventoryPlugin,
+  createResponsivePlugin,
+  createReviewPlugin,
+  createVideoPlugin,
 } from "../../../components/CardPlugin";
+
+import DemoPage from "../_layout/DemoPage";
+import React from "react";
 
 const mockProductB = {
   id: "p-2002",
@@ -18,6 +25,14 @@ const mockProductB = {
   rating: 4.8,
   ratingCount: 5230,
   inventory: 25,
+  // 媒体增强字段
+  video:
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+  images: [
+    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=800&auto=format&fit=crop",
+  ],
 };
 
 const PluginEnhancedCompound: React.FC = () => {
@@ -34,8 +49,24 @@ const PluginEnhancedCompound: React.FC = () => {
             createHoverPlugin({ enableShadow: true, scaleRatio: 1.03 }),
             createAnimationPlugin(),
             createBadgePlugin({ text: mockProductB.badge, position: "top-right" }),
+            createResponsivePlugin({
+              breakpoints: { mobile: 600, tablet: 900, desktop: 1200 },
+              layouts: { mobile: "vertical", tablet: "vertical", desktop: "horizontal" },
+              containerStyles: {
+                mobile: { padding: 8 },
+                tablet: { padding: 12 },
+                desktop: { padding: 16 },
+              },
+            }),
+            createReviewPlugin({ showRating: true, showReviewCount: true }),
+            // 可控位置：通过 headerPosition/order 控制渲染位置与顺序
+            createVideoPlugin({ autoplay: false, controls: true, muted: true, playOnHover: false, headerPosition: "before", order: 5 }),
+            createGalleryPlugin({ autoplay: true, interval: 2500, showIndicators: true, headerPosition: "before", order: 10 }),
+            createInventoryPlugin({ lowStockThreshold: 10, showOverlayWhenSoldOut: true }),
+            createA11yPlugin({ keyboardNavigation: true, announceOnFocus: false }),
           ]}
         >
+          {/* 如果开启 Video/Gallery 插件，头部媒体由插件渲染；这里保留 Image 以兼容无媒体场景 */}
           <ProductCard.Image style={{ width: "100%", aspectRatio: "1 / 1", borderRadius: 8 }} />
           <div style={{ padding: 12 }}>
             <ProductCard.Title />
