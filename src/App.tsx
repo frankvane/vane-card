@@ -15,6 +15,8 @@ import CardHome from "./pages/CardPlugin/Home";
 import FooterActionsSlots from "./pages/CardPlugin/slots/FooterActionsSlots";
 import GridLayout from "./pages/CardPlugin/layouts/GridLayout";
 import HeaderOverlaySlots from "./pages/CardPlugin/slots/HeaderOverlaySlots";
+import GalleryVideoSlots from "./pages/CardPlugin/slots/GalleryVideoSlots";
+import ResponsiveSlots from "./pages/CardPlugin/slots/ResponsiveSlots";
 import HorizontalLayout from "./pages/CardPlugin/layouts/HorizontalLayout";
 import LeftRightCompound from "./pages/CardPlugin/compound/LeftRightCompound";
 import MinimalLayout from "./pages/CardPlugin/layouts/MinimalLayout";
@@ -61,6 +63,8 @@ const App: React.FC = () => {
             <NavLink to="/slots/basic">基础（children）</NavLink>
             <NavLink to="/slots/header-overlay">Header & Overlay</NavLink>
             <NavLink to="/slots/footer-actions">Footer Actions</NavLink>
+            <NavLink to="/slots/gallery-video">Gallery + Video</NavLink>
+            <NavLink to="/slots/responsive">Responsive</NavLink>
           </div>
 
           <h3 style={{ marginTop: 12 }}>复合组件专区</h3>
@@ -86,6 +90,11 @@ const App: React.FC = () => {
             path="/slots/footer-actions"
             element={<FooterActionsSlots />}
           />
+          <Route
+            path="/slots/gallery-video"
+            element={<GalleryVideoSlots />}
+          />
+          <Route path="/slots/responsive" element={<ResponsiveSlots />} />
 
           {/* 布局专区路由 */}
           <Route path="/layouts/vertical" element={<VerticalLayout />} />

@@ -34,6 +34,8 @@ const routeToFileMap: Record<string, string> = {
   "/compound/enhanced": "compound/PluginEnhancedCompound",
   "/compound/left-right": "compound/LeftRightCompound",
   "/compound/top-bottom": "compound/TopBottomCompound",
+  "/slots/responsive": "slots/ResponsiveSlots",
+  "/slots/gallery-video": "slots/GalleryVideoSlots",
 };
 
 // 通过显式的动态导入映射，确保 Vite 能正确打包这些原文件的 raw 文本
@@ -68,6 +70,8 @@ const fileLoaderMap: Record<string, () => Promise<{ default: string }>> = {
     import("../compound/PluginEnhancedCompound.tsx?raw"),
   "compound/LeftRightCompound": () => import("../compound/LeftRightCompound.tsx?raw"),
   "compound/TopBottomCompound": () => import("../compound/TopBottomCompound.tsx?raw"),
+  "slots/ResponsiveSlots": () => import("../slots/ResponsiveSlots.tsx?raw"),
+  "slots/GalleryVideoSlots": () => import("../slots/GalleryVideoSlots.tsx?raw"),
 };
 
 const DemoPage: React.FC<DemoPageProps> = ({
