@@ -9,6 +9,14 @@ import { Actions } from "./components/Actions";
 import { Section } from "./components/Section";
 import { Rating } from "./components/Rating";
 import { Inventory } from "./components/Inventory";
+import { Subtitle } from "./components/Subtitle";
+import { OldPrice } from "./components/OldPrice";
+import { Discount } from "./components/Discount";
+import { Tags } from "./components/Tags";
+import { Brand } from "./components/Brand";
+import { Shipping } from "./components/Shipping";
+import { Warranty } from "./components/Warranty";
+import { Divider } from "./components/Divider";
 
 // 为复合组件定义带静态子组件的类型，解决 TS 下的 "FC<ProductCardProps> 上不存在属性 Image" 问题
 export type ProductCardCompound = React.FC<import("./ProductCard").ProductCardProps> & {
@@ -21,6 +29,14 @@ export type ProductCardCompound = React.FC<import("./ProductCard").ProductCardPr
   Section: typeof Section;
   Rating: typeof Rating;
   Inventory: typeof Inventory;
+  Subtitle: typeof Subtitle;
+  OldPrice: typeof OldPrice;
+  Discount: typeof Discount;
+  Tags: typeof Tags;
+  Brand: typeof Brand;
+  Shipping: typeof Shipping;
+  Warranty: typeof Warranty;
+  Divider: typeof Divider;
 };
 
 // 构建并导出带静态子组件的复合组件实例
@@ -34,6 +50,14 @@ export const ProductCard: ProductCardCompound = ProductCardMain as unknown as Pr
 (ProductCard as any).Section = Section;
 (ProductCard as any).Rating = Rating;
 (ProductCard as any).Inventory = Inventory;
+(ProductCard as any).Subtitle = Subtitle;
+(ProductCard as any).OldPrice = OldPrice;
+(ProductCard as any).Discount = Discount;
+(ProductCard as any).Tags = Tags;
+(ProductCard as any).Brand = Brand;
+(ProductCard as any).Shipping = Shipping;
+(ProductCard as any).Warranty = Warranty;
+(ProductCard as any).Divider = Divider;
 
 // 类型导出
 export type { ProductCardProps, ProductCardContextValue, ProductCardState } from "./ProductCard";
@@ -46,3 +70,11 @@ export type { ActionsProps } from "./components/Actions";
 export type { SectionProps } from "./components/Section";
 export type { RatingProps } from "./components/Rating";
 export type { InventoryProps } from "./components/Inventory";
+export type { SubtitleProps } from "./components/Subtitle";
+export type { OldPriceProps } from "./components/OldPrice";
+export type { DiscountProps } from "./components/Discount";
+export type { TagsProps } from "./components/Tags";
+export type { BrandProps } from "./components/Brand";
+export type { ShippingProps } from "./components/Shipping";
+export type { WarrantyProps } from "./components/Warranty";
+export type { DividerProps } from "./components/Divider";
