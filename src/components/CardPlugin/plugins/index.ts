@@ -21,3 +21,5 @@ export type {
 export { createPluginBus } from "./PluginBus";
 export { createPluginManager } from "./PluginManager";
 export { withPlugins } from "./withPlugins";
+export { BusKeys } from "./BusKeys";
+export type { BusKey } from "./BusKeys";

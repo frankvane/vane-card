@@ -4,13 +4,15 @@
 
 CardPlugin 提供了丰富的示例，展示插件化卡片组件的各种使用场景：
 
-| 示例         | 文件               | 说明                                   |
-| ------------ | ------------------ | -------------------------------------- |
-| **首页**     | `Home.tsx`         | 组件介绍、功能特性、快速导航           |
-| **基础示例** | `BasicDemo.tsx`    | 最简单的使用方式，展示数据驱动的插件   |
-| **高级示例** | `AdvancedDemo.tsx` | 自定义插件、插件通信、高级交互         |
-| **布局示例** | `LayoutDemo.tsx`   | 垂直、横向、大图等不同布局方式         |
-| **插槽示例** | `SlotDemo.tsx`     | 通过 children 和插件钩子实现的插槽功能 |
+| 示例                 | 文件                          | 说明                                                                 |
+| -------------------- | ----------------------------- | -------------------------------------------------------------------- |
+| **首页**             | `Home.tsx`                    | 组件介绍、功能特性、快速导航                                         |
+| **基础示例**         | `compound/BasicCompound.tsx`  | 复合组件基本用法，展示常见子组件与数据驱动                          |
+| **插件增强示例**     | `compound/PluginEnhancedCompound.tsx` | 复合组件 + 插件渐进增强，演示悬停/动画等                             |
+| **布局示例**         | `layouts/*.tsx`               | 垂直、横向、网格、多列、左右图等不同布局方式                         |
+| **插槽示例**         | `slots/*.tsx`                 | 使用 children 与插件钩子实现插槽                                     |
+| **高级示例**         | `advanced/*.tsx`              | 自定义插件、插件通信、高级交互                                      |
+| **电商增强（新增）** | `compound/EcommerceSKUCompound.tsx` | SKU 选择 + 数量步进 + 价格合计 + 比价 + 优惠券 + 标签 + 库存联动    |
 
 ## 🎯 核心概念
 
@@ -400,3 +402,29 @@ const ProductCard = withPlugins(CardCore, {
   enableDebug: true, // 在控制台输出调试信息
 });
 ```
+## 🔗 插件通信总线键约定（关键联动）
+
+- `sku.selection`：选中规格映射（如 `{ 颜色: "黑", 尺码: "M" }`）
+- `sku.variant`：当前匹配的变体对象（含 `sku/stock/price/image`）
+- `sku.price`：当前价格（优先来自选中变体）
+- `quantity`：购买数量（由 `QuantityPlugin` 写入，随规格切换重置/钳制）
+- `coupon.applied`：已应用优惠券对象（`{ code, discount }`）
+
+这些键由示例页与插件协作维护，便于在价格、库存、比价与优惠券之间实现实时联动。
+
+## 🧭 新增示例页导航与使用提示
+
+- 访问电商增强示例：`#/compound/ecommerce-sku`
+- 插件组合建议：
+  - `createSKUPlugin({ attributes, variants })`
+  - `createQuantityPlugin({ min: 1, renderIn: "footer" })`
+  - `createPriceCalculatorPlugin({ showOriginalPrice: true, showTotalPrice: true })`
+  - `createComparePricePlugin({ competitors })`
+  - `createCouponPlugin({ coupons })`
+  - `createUserTagPlugin({ tags })`、`createInventoryPlugin({ lowStockThreshold: 5 })`
+
+## 📝 进一步阅读
+
+- 架构与优化方案：`components/CardPlugin/docs/ARCHITECTURE_AND_OPTIMIZATION.md`
+- 复合组件模式指南：`components/CardPlugin/docs/COMPOUND_COMPONENT_GUIDE.md`
+- 组件增强计划：`components/CardPlugin/docs/ENHANCEMENT_PLAN.md`

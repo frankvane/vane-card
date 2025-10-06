@@ -2,6 +2,7 @@
  * CouponPlugin - 优惠券展示与应用插件
  */
 import type { CardPlugin, PluginCreator } from "../../plugins/types";
+import { BusKeys } from "../../plugins/BusKeys";
 import React from "react";
 
 export interface Coupon {
@@ -29,14 +30,14 @@ export const createCouponPlugin: PluginCreator<any, CouponPluginConfig> = (
     hooks: {
       onMount: (context) => {
         if (config?.autoApply && coupons.length) {
-          context.bus?.setData?.("coupon.applied", coupons[0]);
+          context.bus?.setData?.(BusKeys.couponApplied, coupons[0]);
         }
       },
       renderFooter: (context) => {
         if (!coupons.length) return null;
-        const applied: Coupon | undefined = context.bus?.getData?.("coupon.applied");
-        const apply = (c: Coupon) => context.bus?.setData?.("coupon.applied", c);
-        const clear = () => context.bus?.deleteData?.("coupon.applied");
+        const applied: Coupon | undefined = context.bus?.getData?.(BusKeys.couponApplied);
+        const apply = (c: Coupon) => context.bus?.setData?.(BusKeys.couponApplied, c);
+        const clear = () => context.bus?.deleteData?.(BusKeys.couponApplied);
 
         return (
           <div style={{ padding: 12, borderTop: "1px dashed #eee" }}>

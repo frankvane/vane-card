@@ -2,6 +2,7 @@
  * SKUPlugin - 基础变体选择与匹配
  */
 import type { CardPlugin, PluginCreator } from "../../plugins/types";
+import { BusKeys } from "../../plugins/BusKeys";
 import React from "react";
 
 export interface SKUAttribute {
@@ -86,26 +87,26 @@ export const createSKUPlugin: PluginCreator<any, SKUPluginConfig> = (config) => 
           if (d) acc[a.name] = d;
           return acc;
         }, {});
-        context.bus?.setData?.("sku.selection", initSel);
+        context.bus?.setData?.(BusKeys.skuSelection, initSel);
         const matched = matchVariant(variants, initSel);
-        if (matched) context.bus?.setData?.("sku.variant", matched);
+        if (matched) context.bus?.setData?.(BusKeys.skuVariant, matched);
       },
       renderFooter: (context) => {
         if (renderIn !== "footer") return null;
-        const sel = context.bus?.getData?.<Record<string, string>>("sku.selection") || {};
+        const sel = context.bus?.getData?.<Record<string, string>>(BusKeys.skuSelection) || {};
         const setSel = (name: string, value: string) => {
           const next = { ...sel, [name]: value };
-          context.bus?.setData?.("sku.selection", next);
+          context.bus?.setData?.(BusKeys.skuSelection, next);
           const matched = matchVariant(variants, next);
           if (matched) {
-            context.bus?.setData?.("sku.variant", matched);
+            context.bus?.setData?.(BusKeys.skuVariant, matched);
             // 可选：同步价格或图片到 data 的派生层
-            if (matched.price) context.bus?.setData?.("sku.price", matched.price);
-            if (matched.image) context.bus?.setData?.("sku.image", matched.image);
+            if (matched.price) context.bus?.setData?.(BusKeys.skuPrice, matched.price);
+            if (matched.image) context.bus?.setData?.(BusKeys.skuImage, matched.image);
           }
         };
 
-        const variant = context.bus?.getData?.<SKUVariant>("sku.variant");
+        const variant = context.bus?.getData?.<SKUVariant>(BusKeys.skuVariant);
         return (
           <div style={{ padding: 12, borderTop: "1px dashed #eee" }}>
             <div style={{ fontSize: 12, color: "#999", marginBottom: 6 }}>选择规格</div>
@@ -121,12 +122,12 @@ export const createSKUPlugin: PluginCreator<any, SKUPluginConfig> = (config) => 
       },
       renderOverlay: (context) => {
         if (renderIn !== "overlay") return null;
-        const sel = context.bus?.getData?.<Record<string, string>>("sku.selection") || {};
+        const sel = context.bus?.getData?.<Record<string, string>>(BusKeys.skuSelection) || {};
         const setSel = (name: string, value: string) => {
           const next = { ...sel, [name]: value };
-          context.bus?.setData?.("sku.selection", next);
+          context.bus?.setData?.(BusKeys.skuSelection, next);
           const matched = matchVariant(variants, next);
-          if (matched) context.bus?.setData?.("sku.variant", matched);
+          if (matched) context.bus?.setData?.(BusKeys.skuVariant, matched);
         };
         return (
           <div style={{ position: "absolute", bottom: 8, left: 8, right: 8, background: "rgba(255,255,255,0.9)", borderRadius: 8, padding: 8, zIndex: 9 }}>

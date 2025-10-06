@@ -2,6 +2,9 @@
  * QuantityPlugin - 数量步进器插件
  */
 import type { CardPlugin, PluginCreator } from "../../plugins/types";
+import { BusKeys } from "../../plugins/BusKeys";
+import { setupForceUpdateOnBusKeys } from "../../plugins/utils/busHelpers";
+import { applyDefaults } from "../../plugins/utils/config";
 import React from "react";
 
 export interface QuantityPluginConfig {
@@ -14,11 +17,16 @@ export interface QuantityPluginConfig {
 
 function getMax(context: any, config: QuantityPluginConfig, min: number): number {
   if (typeof config.max === "number") return Math.max(min, config.max);
-  const variant = context.bus?.getData?.("sku.variant") as { stock?: number } | undefined;
+  const variant = context.bus?.getData?.(BusKeys.skuVariant) as { stock?: number } | undefined;
   const stockVariant = config.useVariantStock !== false ? variant?.stock : undefined;
   const inventory = (context.data as any)?.inventory as number | undefined;
   const cap = typeof stockVariant === "number" ? stockVariant : typeof inventory === "number" ? inventory : undefined;
-  return typeof cap === "number" ? Math.max(min, cap) : 99;
+  if (typeof cap === "number") {
+    // 库存为 0 时直接返回 0（缺货），避免最小值提升为 1
+    if (cap <= 0) return 0;
+    return Math.max(min, cap);
+  }
+  return 99;
 }
 
 const Stepper: React.FC<{
@@ -27,26 +35,31 @@ const Stepper: React.FC<{
   step: number;
   max: number;
 }> = ({ context, min, step, max }) => {
-  const q = (context.bus?.getData?.("quantity") as number | undefined) ?? min;
+  const minActive = max === 0 ? 0 : min;
+  const q = (context.bus?.getData?.(BusKeys.quantity) as number | undefined) ?? minActive;
   const setQ = (next: number) => {
-    const clamped = Math.min(Math.max(next, min), max);
-    context.bus?.setData?.("quantity", clamped);
+    const clamped = Math.min(Math.max(next, minActive), max);
+    context.bus?.setData?.(BusKeys.quantity, clamped);
   };
   const dec = () => setQ(q - step);
   const inc = () => setQ(q + step);
 
   // 当规格切换时重置数量到默认值；当库存上限缩小时自动钳制
-  const variantSku = (context.bus?.getData?.("sku.variant") as { sku?: string } | undefined)?.sku;
+  const variantSku = (context.bus?.getData?.(BusKeys.skuVariant) as { sku?: string } | undefined)?.sku;
   const prevSkuRef = React.useRef<string | undefined>(variantSku);
   React.useEffect(() => {
     if (prevSkuRef.current !== variantSku) {
       prevSkuRef.current = variantSku;
-      setQ(min);
+      setQ(max === 0 ? 0 : min);
     }
-  }, [variantSku, min]);
+  }, [variantSku, min, max]);
 
   React.useEffect(() => {
-    if (q > max) setQ(max);
+    if (max === 0) {
+      if (q !== 0) setQ(0);
+    } else if (q > max) {
+      setQ(max);
+    }
   }, [max]);
 
   return (
@@ -54,7 +67,7 @@ const Stepper: React.FC<{
       <span style={{ fontSize: 12, color: "#666" }}>数量</span>
       <button
         onClick={dec}
-        disabled={q <= min}
+        disabled={q <= minActive}
         style={{ padding: "4px 10px", border: "1px solid #ddd", borderRadius: 6, background: "#fff", cursor: q <= min ? "not-allowed" : "pointer" }}
       >
         -
@@ -62,20 +75,25 @@ const Stepper: React.FC<{
       <input
         type="number"
         value={q}
-        min={min}
+        min={minActive}
         max={max}
         step={step}
         onChange={(e) => setQ(Number(e.target.value))}
-        style={{ width: 56, textAlign: "center", padding: "4px 8px", border: "1px solid #ddd", borderRadius: 6 }}
+        disabled={max === 0}
+        style={{ width: 56, textAlign: "center", padding: "4px 8px", border: "1px solid #ddd", borderRadius: 6, background: max === 0 ? "#f7f7f7" : "#fff", color: max === 0 ? "#bbb" : "#333" }}
       />
       <button
         onClick={inc}
-        disabled={q >= max}
+        disabled={q >= max || max === 0}
         style={{ padding: "4px 10px", border: "1px solid #ddd", borderRadius: 6, background: "#fff", cursor: q >= max ? "not-allowed" : "pointer" }}
       >
         +
       </button>
-      <span style={{ marginLeft: "auto", fontSize: 12, color: "#999" }}>最大 {max}</span>
+      {max === 0 ? (
+        <span style={{ marginLeft: "auto", fontSize: 12, color: "#e53935", fontWeight: 700 }}>缺货</span>
+      ) : (
+        <span style={{ marginLeft: "auto", fontSize: 12, color: "#999" }}>最大 {max}</span>
+      )}
     </div>
   );
 };
@@ -83,7 +101,12 @@ const Stepper: React.FC<{
 export const createQuantityPlugin: PluginCreator<any, QuantityPluginConfig> = (
   config = {}
 ) => {
-  const { min = 1, step = 1, renderIn = "footer", useVariantStock = true } = config;
+  const cfg = applyDefaults<QuantityPluginConfig>(config, {
+    min: 1,
+    step: 1,
+    renderIn: "footer",
+    useVariantStock: true,
+  });
 
   const plugin: CardPlugin = {
     name: "QuantityPlugin",
@@ -92,29 +115,37 @@ export const createQuantityPlugin: PluginCreator<any, QuantityPluginConfig> = (
     priority: 30,
     hooks: {
       onMount: (context) => {
-        const initial = Math.max(min, 1);
-        context.bus?.setData?.("quantity", initial);
+        const currentMax = getMax(context, { ...cfg }, cfg.min ?? 1);
+        const initial = currentMax === 0 ? 0 : Math.max(cfg.min ?? 1, 1);
+        context.bus?.setData?.(BusKeys.quantity, initial);
+        // 针对数量与变体变化订阅强制刷新
+        const cleanup = setupForceUpdateOnBusKeys(context, [
+          BusKeys.quantity,
+          BusKeys.skuVariant,
+        ]);
+        // 在卸载时清理（挂载内返回清理函数）
+        return cleanup;
       },
       renderFooter: (context) => {
-        if (renderIn !== "footer") return null;
-        const max = getMax(context, { ...config, useVariantStock }, min);
+        if (cfg.renderIn !== "footer") return null;
+        const max = getMax(context, { ...cfg }, cfg.min ?? 1);
         return (
           <div style={{ padding: 12, borderTop: "1px dashed #eee" }}>
-            <Stepper context={context} min={min} step={step} max={max} />
+            <Stepper context={context} min={cfg.min ?? 1} step={cfg.step ?? 1} max={max} />
           </div>
         );
       },
       renderOverlay: (context) => {
-        if (renderIn !== "overlay") return null;
-        const max = getMax(context, { ...config, useVariantStock }, min);
+        if (cfg.renderIn !== "overlay") return null;
+        const max = getMax(context, { ...cfg }, cfg.min ?? 1);
         return (
           <div style={{ position: "absolute", bottom: 8, left: 8, right: 8, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: 8, zIndex: 9 }}>
-            <Stepper context={context} min={min} step={step} max={max} />
+            <Stepper context={context} min={cfg.min ?? 1} step={cfg.step ?? 1} max={max} />
           </div>
         );
       },
     },
-    config,
+    config: cfg,
   };
 
   return plugin;
