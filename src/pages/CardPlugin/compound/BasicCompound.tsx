@@ -29,15 +29,19 @@ const mockProductA = {
   sizes: ["38", "39", "40", "41", "42"],
   // 变体数组：每个组合具备独立的 price/oldPrice/stock/sku，可被选择器与子组件联动
   variants: [
-    { sku: "SKU-SPORT-1001-B-38", options: { 颜色: "蓝", 尺码: "38" }, price: 349, oldPrice: 399, stock: 2 },
-    { sku: "SKU-SPORT-1001-B-39", options: { 颜色: "蓝", 尺码: "39" }, price: 349, oldPrice: 399, stock: 1 },
-    { sku: "SKU-SPORT-1001-B-40", options: { 颜色: "蓝", 尺码: "40" }, price: 359, oldPrice: 399, stock: 0 },
-    { sku: "SKU-SPORT-1001-R-38", options: { 颜色: "红", 尺码: "38" }, price: 339, oldPrice: 399, stock: 5 },
-    { sku: "SKU-SPORT-1001-R-39", options: { 颜色: "红", 尺码: "39" }, price: 339, oldPrice: 399, stock: 3 },
-    { sku: "SKU-SPORT-1001-R-40", options: { 颜色: "红", 尺码: "40" }, price: 349, oldPrice: 399, stock: 1 },
-    { sku: "SKU-SPORT-1001-G-38", options: { 颜色: "绿", 尺码: "38" }, price: 329, oldPrice: 399, stock: 0 },
-    { sku: "SKU-SPORT-1001-G-39", options: { 颜色: "绿", 尺码: "39" }, price: 329, oldPrice: 399, stock: 4 },
-    { sku: "SKU-SPORT-1001-G-40", options: { 颜色: "绿", 尺码: "40" }, price: 339, oldPrice: 399, stock: 2 },
+    // 为现有变体增加“材质/特性”默认值，以保证选择器与 SKU 匹配
+    { sku: "SKU-SPORT-1001-B-38", options: { 颜色: "蓝", 尺码: "38", 材质: "网面", 特性: "轻量鞋身" }, price: 349, oldPrice: 399, stock: 2 },
+    { sku: "SKU-SPORT-1001-B-39", options: { 颜色: "蓝", 尺码: "39", 材质: "网面", 特性: "轻量鞋身" }, price: 349, oldPrice: 399, stock: 1 },
+    { sku: "SKU-SPORT-1001-B-40", options: { 颜色: "蓝", 尺码: "40", 材质: "网面", 特性: "轻量鞋身" }, price: 359, oldPrice: 399, stock: 0 },
+    { sku: "SKU-SPORT-1001-R-38", options: { 颜色: "红", 尺码: "38", 材质: "网面", 特性: "轻量鞋身" }, price: 339, oldPrice: 399, stock: 5 },
+    { sku: "SKU-SPORT-1001-R-39", options: { 颜色: "红", 尺码: "39", 材质: "网面", 特性: "轻量鞋身" }, price: 339, oldPrice: 399, stock: 3 },
+    { sku: "SKU-SPORT-1001-R-40", options: { 颜色: "红", 尺码: "40", 材质: "网面", 特性: "轻量鞋身" }, price: 349, oldPrice: 399, stock: 1 },
+    { sku: "SKU-SPORT-1001-G-38", options: { 颜色: "绿", 尺码: "38", 材质: "网面", 特性: "轻量鞋身" }, price: 329, oldPrice: 399, stock: 0 },
+    { sku: "SKU-SPORT-1001-G-39", options: { 颜色: "绿", 尺码: "39", 材质: "网面", 特性: "轻量鞋身" }, price: 329, oldPrice: 399, stock: 4 },
+    { sku: "SKU-SPORT-1001-G-40", options: { 颜色: "绿", 尺码: "40", 材质: "网面", 特性: "轻量鞋身" }, price: 339, oldPrice: 399, stock: 2 },
+    // 新增少量不同“材质/特性”的变体，用于演示变体维度扩展
+    { sku: "SKU-SPORT-1001-B-38-LEATHER-CUSH", options: { 颜色: "蓝", 尺码: "38", 材质: "皮革", 特性: "缓震中底" }, price: 379, oldPrice: 399, stock: 3 },
+    { sku: "SKU-SPORT-1001-R-39-FABRIC-BREATH", options: { 颜色: "红", 尺码: "39", 材质: "织物", 特性: "透气网面" }, price: 349, oldPrice: 399, stock: 2 },
   ],
 };
 
@@ -101,8 +105,10 @@ const BasicCompound: React.FC = () => {
                   ]}
                 />
                 <ProductCard.SizeSelector attributeName="尺码" sizes={["38", "39", "40"]} />
-                {/* 若该属性不参与 SKU 组合，避免写入以免影响变体匹配 */}
-                {/* <ProductCard.OptionPicker name="材质" options={["网面", "皮革", "织物"]} /> */}
+                {/* 将 features/specs 加入 SKU 维度：示例用“特性/材质” */}
+                <ProductCard.OptionPicker name="特性" options={["轻量鞋身", "缓震中底", "透气网面"]} />
+                <ProductCard.OptionPicker name="材质" options={["网面", "皮革", "织物"]} />
+                {/* 若希望自动推导所有属性集，可继续保留 VariantSelector */}
                 <ProductCard.VariantSelector />
               </div>
 
