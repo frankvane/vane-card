@@ -61,7 +61,7 @@ const PluginEnhancedCompound: React.FC = () => {
             createReviewPlugin({ showRating: true, showReviewCount: true }),
             // 可控位置：通过 headerPosition/order 控制渲染位置与顺序
             createVideoPlugin({ autoplay: false, controls: true, muted: true, playOnHover: false, headerPosition: "before", order: 5 }),
-            createGalleryPlugin({ autoplay: true, interval: 2500, showIndicators: true, headerPosition: "before", order: 10 }),
+            createGalleryPlugin({ autoplay: true, interval: 2500, showIndicators: true, headerPosition: "before", order: 10 ,videoIndex:1}),
             createInventoryPlugin({ lowStockThreshold: 10, showOverlayWhenSoldOut: true }),
             createA11yPlugin({ keyboardNavigation: true, announceOnFocus: false }),
           ]}
