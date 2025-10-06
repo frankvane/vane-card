@@ -5,6 +5,11 @@
 
 import { Link } from "react-router-dom";
 import React from "react";
+import {
+  ProductCard,
+  createHoverPlugin,
+  createAnimationPlugin,
+} from "../../components/CardPlugin";
 
 export default function CardPluginHome() {
   return (
@@ -228,6 +233,92 @@ export default function CardPluginHome() {
               演示通过 children 和插件钩子实现的各种插槽功能
             </p>
           </Link>
+        </div>
+      </div>
+
+      {/* 复合组件版块 */}
+      <div style={{ marginBottom: "60px" }}>
+        <h2
+          style={{
+            fontSize: "32px",
+            fontWeight: "600",
+            marginBottom: "24px",
+            textAlign: "center",
+          }}
+        >
+          复合组件（ProductCard.*）
+        </h2>
+        <p style={{ textAlign: "center", color: "#666", marginBottom: "16px" }}>
+          面向业务开发者的直观用法：结构交由复合组件表达，行为交由插件增强
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
+            gap: "24px",
+          }}
+        >
+          {/* 基础：复合组件模式 */}
+          <div style={{ background: "#fff", borderRadius: "12px", padding: "16px" }}>
+            <h3 style={{ fontSize: "20px", marginBottom: "12px" }}>基础：复合组件模式</h3>
+            <div style={{ border: "1px solid #eee", borderRadius: "8px", overflow: "hidden" }}>
+              <ProductCard
+                productId="p-basic"
+                data={{
+                  title: "高端运动鞋",
+                  description: "舒适透气，适合长跑和日常穿着",
+                  price: 349,
+                  image: "/vite.svg",
+                  badge: "热卖",
+                }}
+                containerStyle={{ background: "#fafafa" }}
+              >
+                <ProductCard.Image />
+                <div style={{ padding: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <ProductCard.Badge />
+                    <ProductCard.Title />
+                  </div>
+                  <ProductCard.Description />
+                  <ProductCard.Price />
+                  <ProductCard.Actions />
+                </div>
+              </ProductCard>
+            </div>
+          </div>
+
+          {/* 增强：复合组件 + 插件模式 */}
+          <div style={{ background: "#fff", borderRadius: "12px", padding: "16px" }}>
+            <h3 style={{ fontSize: "20px", marginBottom: "12px" }}>增强：复合组件 + 插件模式</h3>
+            <div style={{ border: "1px solid #eee", borderRadius: "8px", overflow: "hidden" }}>
+              <ProductCard
+                productId="p-enhanced"
+                data={{
+                  title: "智能手表",
+                  description: "全天候健康监测，支持离线音乐",
+                  price: 2999,
+                  image: "/vite.svg",
+                  badge: "甄选",
+                }}
+                plugins={[
+                  createHoverPlugin({ enableShadow: true, enableScale: true }),
+                  createAnimationPlugin(),
+                ]}
+                containerStyle={{ background: "#fafafa" }}
+              >
+                <ProductCard.Image />
+                <div style={{ padding: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <ProductCard.Badge />
+                    <ProductCard.Title />
+                  </div>
+                  <ProductCard.Description />
+                  <ProductCard.Price />
+                  <ProductCard.Actions />
+                </div>
+              </ProductCard>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -30,6 +30,8 @@ const routeToFileMap: Record<string, string> = {
   "/layouts/minimal": "layouts/MinimalLayout",
   "/layouts/background": "layouts/BackgroundImageLayout",
   "/layouts/two-column": "layouts/TwoColumnLayout",
+  "/compound/basic": "compound/BasicCompound",
+  "/compound/enhanced": "compound/PluginEnhancedCompound",
 };
 
 // 通过显式的动态导入映射，确保 Vite 能正确打包这些原文件的 raw 文本
@@ -59,6 +61,9 @@ const fileLoaderMap: Record<string, () => Promise<{ default: string }>> = {
   "layouts/BackgroundImageLayout": () =>
     import("../layouts/BackgroundImageLayout.tsx?raw"),
   "layouts/TwoColumnLayout": () => import("../layouts/TwoColumnLayout.tsx?raw"),
+  "compound/BasicCompound": () => import("../compound/BasicCompound.tsx?raw"),
+  "compound/PluginEnhancedCompound": () =>
+    import("../compound/PluginEnhancedCompound.tsx?raw"),
 };
 
 const DemoPage: React.FC<DemoPageProps> = ({

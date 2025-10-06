@@ -3,6 +3,8 @@ import "./App.css";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
 import AdvAllInOne from "./pages/CardPlugin/advanced/AllInOne";
+import BasicCompound from "./pages/CardPlugin/compound/BasicCompound";
+import PluginEnhancedCompound from "./pages/CardPlugin/compound/PluginEnhancedCompound";
 import AdvAnimationAnalytics from "./pages/CardPlugin/advanced/AnimationAnalytics";
 import AdvCountdownPromo from "./pages/CardPlugin/advanced/CountdownPromo";
 import AdvCustomActions from "./pages/CardPlugin/advanced/CustomActions";
@@ -58,6 +60,12 @@ const App: React.FC = () => {
             <NavLink to="/slots/header-overlay">Header & Overlay</NavLink>
             <NavLink to="/slots/footer-actions">Footer Actions</NavLink>
           </div>
+
+          <h3 style={{ marginTop: 12 }}>复合组件专区</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <NavLink to="/compound/basic">基础：复合组件</NavLink>
+            <NavLink to="/compound/enhanced">增强：复合组件+插件</NavLink>
+          </div>
         </nav>
       </aside>
       <main className="main">
@@ -103,6 +111,10 @@ const App: React.FC = () => {
             element={<AdvCountdownPromo />}
           />
           <Route path="/advanced/all-in-one" element={<AdvAllInOne />} />
+
+          {/* 复合组件专区路由 */}
+          <Route path="/compound/basic" element={<BasicCompound />} />
+          <Route path="/compound/enhanced" element={<PluginEnhancedCompound />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

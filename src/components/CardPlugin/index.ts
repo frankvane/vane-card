@@ -27,3 +27,6 @@ export { withPlugins } from "./plugins";
 
 // 自定义插件统一导出
 export * from "./custom-plugins";
+
+// 复合组件导出（ProductCard 及其子组件与类型）
+export * from "./compound";
