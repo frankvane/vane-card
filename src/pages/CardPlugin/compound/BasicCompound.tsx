@@ -1,6 +1,6 @@
-import React from "react";
 import DemoPage from "../_layout/DemoPage";
 import { ProductCard } from "../../../components/CardPlugin";
+import React from "react";
 
 const mockProductA = {
   id: "p-1001",

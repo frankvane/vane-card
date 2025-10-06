@@ -3,13 +3,12 @@ import "./App.css";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
 import AdvAllInOne from "./pages/CardPlugin/advanced/AllInOne";
-import BasicCompound from "./pages/CardPlugin/compound/BasicCompound";
-import PluginEnhancedCompound from "./pages/CardPlugin/compound/PluginEnhancedCompound";
 import AdvAnimationAnalytics from "./pages/CardPlugin/advanced/AnimationAnalytics";
 import AdvCountdownPromo from "./pages/CardPlugin/advanced/CountdownPromo";
 import AdvCustomActions from "./pages/CardPlugin/advanced/CustomActions";
 import BackgroundImageLayout from "./pages/CardPlugin/layouts/BackgroundImageLayout";
 import BannerLayout from "./pages/CardPlugin/layouts/BannerLayout";
+import BasicCompound from "./pages/CardPlugin/compound/BasicCompound";
 import BasicSlots from "./pages/CardPlugin/slots/BasicSlots";
 import BottomImageLayout from "./pages/CardPlugin/layouts/BottomImageLayout";
 import CardHome from "./pages/CardPlugin/Home";
@@ -17,9 +16,12 @@ import FooterActionsSlots from "./pages/CardPlugin/slots/FooterActionsSlots";
 import GridLayout from "./pages/CardPlugin/layouts/GridLayout";
 import HeaderOverlaySlots from "./pages/CardPlugin/slots/HeaderOverlaySlots";
 import HorizontalLayout from "./pages/CardPlugin/layouts/HorizontalLayout";
+import LeftRightCompound from "./pages/CardPlugin/compound/LeftRightCompound";
 import MinimalLayout from "./pages/CardPlugin/layouts/MinimalLayout";
+import PluginEnhancedCompound from "./pages/CardPlugin/compound/PluginEnhancedCompound";
 import React from "react";
 import RightImageLayout from "./pages/CardPlugin/layouts/RightImageLayout";
+import TopBottomCompound from "./pages/CardPlugin/compound/TopBottomCompound";
 import TwoColumnLayout from "./pages/CardPlugin/layouts/TwoColumnLayout";
 import VerticalLayout from "./pages/CardPlugin/layouts/VerticalLayout";
 
@@ -63,7 +65,9 @@ const App: React.FC = () => {
 
           <h3 style={{ marginTop: 12 }}>复合组件专区</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <NavLink to="/compound/basic">基础：复合组件</NavLink>
+            <NavLink to="/compound/basic">基础应用</NavLink>
+            <NavLink to="/compound/left-right">左右布局</NavLink>
+            <NavLink to="/compound/top-bottom">上下布局</NavLink>
             <NavLink to="/compound/enhanced">增强：复合组件+插件</NavLink>
           </div>
         </nav>
@@ -114,7 +118,12 @@ const App: React.FC = () => {
 
           {/* 复合组件专区路由 */}
           <Route path="/compound/basic" element={<BasicCompound />} />
-          <Route path="/compound/enhanced" element={<PluginEnhancedCompound />} />
+          <Route
+            path="/compound/enhanced"
+            element={<PluginEnhancedCompound />}
+          />
+          <Route path="/compound/left-right" element={<LeftRightCompound />} />
+          <Route path="/compound/top-bottom" element={<TopBottomCompound />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
