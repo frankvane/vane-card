@@ -48,10 +48,10 @@
   - ✅ **已落地**：当库存为 0 时，`QuantityPlugin` 将数量设为 0 并禁用交互（显示缺货），避免误购。
 
 3) 交互与 UX
-- 数量联动：已实现规格切换时数量重置与上限钳制；可增加配置 `resetOnVariantChange`、`clampOnMaxDecrease`。
-- 价格联动：已在 `PriceCalculatorPlugin` 支持显示合计（`showTotalPrice`）；可以扩展为账单明细插件（见新增模块）。
-- 比价高亮与排序：`ComparePricePlugin` 可增加排序/过滤与价格波动提示。
-- 优惠券智能推荐：根据 `subtotal` 提示更优券（规则引擎/最优券算法）。
+- ✅ 数量联动：已实现规格切换时数量重置与上限钳制；新增配置 `resetOnVariantChange`、`clampOnMaxDecrease`（默认启用）。
+- ✅ 价格联动：`PriceCalculatorPlugin` 支持显示合计（`showTotalPrice`）；新增 `OrderSummaryPlugin` 展示账单明细（税费/运费可选）。
+- ✅ 比价高亮与排序：`ComparePricePlugin` 已增强排序/过滤与低价高亮/差值提示，并联动当前价。
+- ✅ 优惠券智能推荐：新增 `CouponRecommendPlugin` 基于 `subtotal` 推荐更优券，支持一键应用与自动应用（可选）。
 - 可访问性：补充按钮 `aria-pressed/aria-label`，键盘操作、焦点管理、语义结构优化。
 
 4) 工程与测试

@@ -1,18 +1,33 @@
 /**
- * ComparePricePlugin - 比价展示插件
+ * ComparePricePlugin - 比价展示插件（增强：排序/过滤/低价高亮/波动提示）
  */
 import type { CardPlugin, PluginCreator } from "../../plugins/types";
+import { BusKeys } from "../../plugins/BusKeys";
+import { setupForceUpdateOnBusKeys } from "../../plugins/utils/busHelpers";
 import React from "react";
 
 export interface ComparePricePluginConfig {
   competitors?: Array<{ name: string; price: number; url?: string }>;
   showLowestPrice?: boolean;
+  sortBy?: "price" | "name";
+  sortOrder?: "asc" | "desc";
+  filterMaxPrice?: number;
+  highlightLowerThanOurPrice?: boolean;
+  priceDiffHighlightThreshold?: number; // 与当前价差超过阈值高亮
 }
 
 export const createComparePricePlugin: PluginCreator<any, ComparePricePluginConfig> = (
   config = {}
 ) => {
-  const { competitors = [], showLowestPrice = true } = config;
+  const {
+    competitors = [],
+    showLowestPrice = true,
+    sortBy = "price",
+    sortOrder = "asc",
+    filterMaxPrice,
+    highlightLowerThanOurPrice = true,
+    priceDiffHighlightThreshold = 0,
+  } = config;
 
   const plugin: CardPlugin = {
     name: "ComparePricePlugin",
@@ -20,23 +35,51 @@ export const createComparePricePlugin: PluginCreator<any, ComparePricePluginConf
     description: "展示其他平台价格对比",
     priority: 20,
     hooks: {
-      renderFooter: () => {
+      onMount: (context) => {
+        // 当当前价变化时，触发更新以重算高亮
+        const cleanup = setupForceUpdateOnBusKeys(context, [BusKeys.skuPrice]);
+        return cleanup;
+      },
+      renderFooter: (context) => {
         if (!competitors.length) return null;
-        const lowest = showLowestPrice
-          ? competitors.reduce((min, c) => (c.price < min.price ? c : min), competitors[0])
+        const currentPrice = Number(
+          (context.bus?.getData?.(BusKeys.skuPrice) as any) ?? (context.data as any)?.price ?? 0
+        );
+
+        let list = [...competitors];
+        if (typeof filterMaxPrice === "number") {
+          list = list.filter((c) => c.price <= filterMaxPrice!);
+        }
+        list.sort((a, b) => {
+          const valA = sortBy === "name" ? a.name.localeCompare(b.name) : a.price - 0;
+          const valB = sortBy === "name" ? b.name.localeCompare(a.name) : b.price - 0;
+          const cmp = sortBy === "name" ? valA - valB : (a.price - b.price);
+          return sortOrder === "asc" ? cmp : -cmp;
+        });
+
+        const lowest = showLowestPrice && list.length
+          ? list.reduce((min, c) => (c.price < min.price ? c : min), list[0])
           : undefined;
         return (
           <div style={{ padding: 12, borderTop: "1px dashed #eee" }}>
             <div style={{ fontSize: 12, color: "#999", marginBottom: 6 }}>平台价格对比</div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 6 }}>
-              {competitors.map((c) => (
+              {list.map((c) => {
+                const isLowest = lowest?.name === c.name;
+                const lowerThanOur = highlightLowerThanOurPrice && currentPrice > 0 && c.price < currentPrice;
+                const diff = currentPrice > 0 ? currentPrice - c.price : 0;
+                const highlight = isLowest || lowerThanOur || (priceDiffHighlightThreshold > 0 && diff >= priceDiffHighlightThreshold);
+                return (
                 <React.Fragment key={c.name}>
                   <div style={{ fontSize: 13, color: "#555" }}>{c.name}</div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: lowest?.name === c.name ? "#388e3c" : "#333" }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: highlight ? "#388e3c" : "#333" }}>
                     ¥{c.price}
+                    {lowerThanOur && (
+                      <span title="低于当前价" style={{ marginLeft: 6, fontSize: 11, color: "#388e3c" }}>↓{Math.max(0, diff)}</span>
+                    )}
                   </div>
                 </React.Fragment>
-              ))}
+              );})}
             </div>
             {lowest && (
               <div style={{ marginTop: 6, fontSize: 12, color: "#388e3c" }}>

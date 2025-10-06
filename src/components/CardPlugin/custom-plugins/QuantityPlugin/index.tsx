@@ -13,6 +13,8 @@ export interface QuantityPluginConfig {
   step?: number;
   renderIn?: "footer" | "overlay";
   useVariantStock?: boolean; // 优先使用选中变体的库存作为上限
+  resetOnVariantChange?: boolean; // 规格切换时是否重置数量到最小值
+  clampOnMaxDecrease?: boolean; // 当最大值下降时是否钳制到新上限
 }
 
 function getMax(context: any, config: QuantityPluginConfig, min: number): number {
@@ -34,7 +36,9 @@ const Stepper: React.FC<{
   min: number;
   step: number;
   max: number;
-}> = ({ context, min, step, max }) => {
+  resetOnVariantChange?: boolean;
+  clampOnMaxDecrease?: boolean;
+}> = ({ context, min, step, max, resetOnVariantChange = true, clampOnMaxDecrease = true }) => {
   const minActive = max === 0 ? 0 : min;
   const q = (context.bus?.getData?.(BusKeys.quantity) as number | undefined) ?? minActive;
   const setQ = (next: number) => {
@@ -50,17 +54,19 @@ const Stepper: React.FC<{
   React.useEffect(() => {
     if (prevSkuRef.current !== variantSku) {
       prevSkuRef.current = variantSku;
-      setQ(max === 0 ? 0 : min);
+      if (resetOnVariantChange) {
+        setQ(max === 0 ? 0 : min);
+      }
     }
-  }, [variantSku, min, max]);
+  }, [variantSku, min, max, resetOnVariantChange]);
 
   React.useEffect(() => {
     if (max === 0) {
       if (q !== 0) setQ(0);
-    } else if (q > max) {
+    } else if (clampOnMaxDecrease && q > max) {
       setQ(max);
     }
-  }, [max]);
+  }, [max, clampOnMaxDecrease]);
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -106,6 +112,8 @@ export const createQuantityPlugin: PluginCreator<any, QuantityPluginConfig> = (
     step: 1,
     renderIn: "footer",
     useVariantStock: true,
+    resetOnVariantChange: true,
+    clampOnMaxDecrease: true,
   });
 
   const plugin: CardPlugin = {
@@ -131,7 +139,14 @@ export const createQuantityPlugin: PluginCreator<any, QuantityPluginConfig> = (
         const max = getMax(context, { ...cfg }, cfg.min ?? 1);
         return (
           <div style={{ padding: 12, borderTop: "1px dashed #eee" }}>
-            <Stepper context={context} min={cfg.min ?? 1} step={cfg.step ?? 1} max={max} />
+            <Stepper
+              context={context}
+              min={cfg.min ?? 1}
+              step={cfg.step ?? 1}
+              max={max}
+              resetOnVariantChange={cfg.resetOnVariantChange}
+              clampOnMaxDecrease={cfg.clampOnMaxDecrease}
+            />
           </div>
         );
       },
@@ -140,7 +155,14 @@ export const createQuantityPlugin: PluginCreator<any, QuantityPluginConfig> = (
         const max = getMax(context, { ...cfg }, cfg.min ?? 1);
         return (
           <div style={{ position: "absolute", bottom: 8, left: 8, right: 8, background: "rgba(255,255,255,0.92)", borderRadius: 8, padding: 8, zIndex: 9 }}>
-            <Stepper context={context} min={cfg.min ?? 1} step={cfg.step ?? 1} max={max} />
+            <Stepper
+              context={context}
+              min={cfg.min ?? 1}
+              step={cfg.step ?? 1}
+              max={max}
+              resetOnVariantChange={cfg.resetOnVariantChange}
+              clampOnMaxDecrease={cfg.clampOnMaxDecrease}
+            />
           </div>
         );
       },

@@ -2,7 +2,9 @@ import {
   ProductCard,
   createComparePricePlugin,
   createCouponPlugin,
+  createCouponRecommendPlugin,
   createInventoryPlugin,
+  createOrderSummaryPlugin,
   createPriceCalculatorPlugin,
   createSKUPlugin,
   createUserTagPlugin,
@@ -69,9 +71,15 @@ const EcommerceSKUCompound: React.FC = () => {
             createUserTagPlugin({ tags: userTags }),
             createInventoryPlugin({ lowStockThreshold: 5, showOverlayWhenSoldOut: true }),
             createSKUPlugin({ attributes, variants, renderIn: "footer" }),
-            createQuantityPlugin({ renderIn: "footer", min: 1 }),
+            // 数量联动：变更规格时重置为可售范围，最大值降低时自动回退
+            createQuantityPlugin({ renderIn: "footer", min: 1, resetOnVariantChange: true, clampOnMaxDecrease: true }),
+            // 价格联动：展示总价；并在底部显示订单摘要（单价×数量−优惠券 等）
             createPriceCalculatorPlugin({ showOriginalPrice: true, currency: "CNY", showTotalPrice: true }),
-            createComparePricePlugin({ competitors }),
+            createOrderSummaryPlugin({ showBreakdown: true, showTax: false, showShipping: false, placement: "footer" }),
+            // 比价增强：按价格升序、低于当前价高亮、设置高亮阈值
+            createComparePricePlugin({ competitors, sortBy: "price", sortOrder: "asc", highlightLowerThanOurPrice: true, priceDiffHighlightThreshold: 10 }),
+            // 优惠券：智能推荐最佳券，并保留手动选择能力
+            createCouponRecommendPlugin({ coupons, autoApplyBest: true, currency: "CNY" }),
             createCouponPlugin({ coupons }),
           ]}
         >
