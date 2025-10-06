@@ -41,6 +41,12 @@ const Stepper: React.FC<{
 }> = ({ context, min, step, max, resetOnVariantChange = true, clampOnMaxDecrease = true }) => {
   const minActive = max === 0 ? 0 : min;
   const q = (context.bus?.getData?.(BusKeys.quantity) as number | undefined) ?? minActive;
+  // 输入防抖与本地显示值（不立即写入总线）
+  const [inputVal, setInputVal] = React.useState<string>(String(q));
+  React.useEffect(() => {
+    setInputVal(String(q));
+  }, [q]);
+  const timerRef = React.useRef<number | undefined>(undefined);
   const setQ = (next: number) => {
     const clamped = Math.min(Math.max(next, minActive), max);
     context.bus?.setData?.(BusKeys.quantity, clamped);
@@ -80,11 +86,23 @@ const Stepper: React.FC<{
       </button>
       <input
         type="number"
-        value={q}
+        value={inputVal}
         min={minActive}
         max={max}
         step={step}
-        onChange={(e) => setQ(Number(e.target.value))}
+        onChange={(e) => {
+          const val = e.target.value;
+          setInputVal(val);
+          if (timerRef.current) {
+            window.clearTimeout(timerRef.current);
+          }
+          timerRef.current = window.setTimeout(() => {
+            const n = Number(val);
+            if (Number.isFinite(n)) {
+              setQ(n);
+            }
+          }, 150);
+        }}
         disabled={max === 0}
         style={{ width: 56, textAlign: "center", padding: "4px 8px", border: "1px solid #ddd", borderRadius: 6, background: max === 0 ? "#f7f7f7" : "#fff", color: max === 0 ? "#bbb" : "#333" }}
       />
@@ -100,6 +118,13 @@ const Stepper: React.FC<{
       ) : (
         <span style={{ marginLeft: "auto", fontSize: 12, color: "#999" }}>最大 {max}</span>
       )}
+      {(() => {
+        const n = Number(inputVal);
+        const invalid = !Number.isFinite(n) || n < minActive || n > max;
+        return invalid ? (
+          <span style={{ marginLeft: 8, fontSize: 12, color: "#e53935" }}>请输入 {minActive} 至 {max} 的整数</span>
+        ) : null;
+      })()}
     </div>
   );
 };

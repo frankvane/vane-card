@@ -86,23 +86,23 @@
 ## 现有组件的改进计划（示例）
 
 - PriceCalculatorPlugin
-  - 新增账单明细模式：`showBreakdown`，支持税费/运费显示与可配置项。
-  - 输出事件：`price:change`（含当前单价/数量/合计），供外部埋点使用。
+  - 新增账单明细模式：`showBreakdown`，支持税费/运费显示与可配置项。✅ 已落地（通过 OrderSummaryPlugin 展示）
+  - 输出事件：`price:change`（含当前单价/数量/合计），供外部埋点使用。✅ 已落地
 
 - ComparePricePlugin
-  - 支持排序与高亮策略：最低价/平台白名单；增加波动标记（涨/跌）。
+  - 支持排序与高亮策略：最低价/平台白名单；增加波动标记（涨/跌）。✅ 已落地（排序/过滤/差值提示与联动高亮）
 
 - CouponPlugin
-  - 增加“智能选券”功能：根据 `subtotal` 推荐最优券；配置 `autoSuggest`。
+  - 增加“智能选券”功能：根据 `subtotal` 推荐最优券；配置 `autoSuggest`。✅ 已落地（通过 CouponRecommendPlugin 推荐与可选自动应用）
 
 - SKUPlugin
-  - 输出事件：`sku:change`（携带 attrs、variant、stock）；与数量插件协作（已实现重置与钳制）。
+  - 输出事件：`sku:change`（携带 attrs、variant、stock）；与数量插件协作（已实现重置与钳制）。✅ 已落地
 
 - QuantityPlugin
-  - 增加配置：`resetOnVariantChange`、`clampOnMaxDecrease`；对输入非法值的防抖与提示。
+  - 增加配置：`resetOnVariantChange`、`clampOnMaxDecrease`；对输入非法值的防抖与提示。✅ 已落地
 
 - A11yPlugin
-  - 完善 ARIA 与键盘操作支持；聚焦环可配置。
+  - 完善 ARIA 与键盘操作支持；聚焦环可配置。⏳ 进行中
 
 ## 文档规划与维护
 

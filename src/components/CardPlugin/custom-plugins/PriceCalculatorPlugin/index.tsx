@@ -47,13 +47,31 @@ export const createPriceCalculatorPlugin: PluginCreator<any, PriceCalculatorPlug
     priority: 20,
     hooks: {
       onMount: (context) => {
-        // 仅在价格/数量/优惠券相关键变化时触发更新
-        const cleanup = setupForceUpdateOnBusKeys(context, [
-          BusKeys.skuPrice,
-          BusKeys.quantity,
-          BusKeys.couponApplied,
-        ]);
-        return cleanup;
+        // 在价格/数量/优惠券相关键变化时触发更新与事件发布
+        const recalc = () => {
+          const skuPrice = context.bus?.getData?.(BusKeys.skuPrice);
+          const price = Number((skuPrice as any) ?? (context.data as any)?.price ?? 0);
+          const quantity = Number(context.bus?.getData?.(BusKeys.quantity) ?? 1);
+          const appliedCoupon = context.bus?.getData?.(BusKeys.couponApplied) as { code?: string; discount?: number } | undefined;
+          const subtotal = price * quantity;
+          const total = Math.max(0, subtotal - (appliedCoupon?.discount ?? 0));
+          // 发布 price:change 事件（含当前单价/数量/小计/合计/券）
+          context.bus?.emit?.("price:change", { price, quantity, subtotal, total, coupon: appliedCoupon });
+          // 触发 UI 刷新
+          context.forceUpdate();
+        };
+
+        const off1 = context.bus?.on?.(BusKeys.skuPrice, recalc);
+        const off2 = context.bus?.on?.(BusKeys.quantity, recalc);
+        const off3 = context.bus?.on?.(BusKeys.couponApplied, recalc);
+        // 初始化一次
+        recalc();
+        // 卸载清理
+        return () => {
+          try { off1 && off1(); } catch {}
+          try { off2 && off2(); } catch {}
+          try { off3 && off3(); } catch {}
+        };
       },
       renderFooter: (context) => {
         const skuPrice = context.bus?.getData?.(BusKeys.skuPrice);
