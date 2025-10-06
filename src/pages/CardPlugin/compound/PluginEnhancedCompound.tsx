@@ -67,7 +67,7 @@ const PluginEnhancedCompound: React.FC = () => {
           ]}
         >
           {/* 如果开启 Video/Gallery 插件，头部媒体由插件渲染；这里保留 Image 以兼容无媒体场景 */}
-          <ProductCard.Image style={{ width: "100%", aspectRatio: "1 / 1", borderRadius: 8 }} />
+          {/* <ProductCard.Image style={{ width: "100%", aspectRatio: "1 / 1", borderRadius: 8 }} /> */}
           <div style={{ padding: 12 }}>
             <ProductCard.Title />
             <ProductCard.Price />
