@@ -27,7 +27,18 @@ const mockProductA = {
   weight: 0.35, // kg，用于单价显示
   colors: ["#1e90ff", "#ff4757", "#2ed573"],
   sizes: ["38", "39", "40", "41", "42"],
-  variants: { 尺码: ["38", "39", "40"], 颜色: ["蓝", "红", "绿"] },
+  // 变体数组：每个组合具备独立的 price/oldPrice/stock/sku，可被选择器与子组件联动
+  variants: [
+    { sku: "SKU-SPORT-1001-B-38", options: { 颜色: "蓝", 尺码: "38" }, price: 349, oldPrice: 399, stock: 2 },
+    { sku: "SKU-SPORT-1001-B-39", options: { 颜色: "蓝", 尺码: "39" }, price: 349, oldPrice: 399, stock: 1 },
+    { sku: "SKU-SPORT-1001-B-40", options: { 颜色: "蓝", 尺码: "40" }, price: 359, oldPrice: 399, stock: 0 },
+    { sku: "SKU-SPORT-1001-R-38", options: { 颜色: "红", 尺码: "38" }, price: 339, oldPrice: 399, stock: 5 },
+    { sku: "SKU-SPORT-1001-R-39", options: { 颜色: "红", 尺码: "39" }, price: 339, oldPrice: 399, stock: 3 },
+    { sku: "SKU-SPORT-1001-R-40", options: { 颜色: "红", 尺码: "40" }, price: 349, oldPrice: 399, stock: 1 },
+    { sku: "SKU-SPORT-1001-G-38", options: { 颜色: "绿", 尺码: "38" }, price: 329, oldPrice: 399, stock: 0 },
+    { sku: "SKU-SPORT-1001-G-39", options: { 颜色: "绿", 尺码: "39" }, price: 329, oldPrice: 399, stock: 4 },
+    { sku: "SKU-SPORT-1001-G-40", options: { 颜色: "绿", 尺码: "40" }, price: 339, oldPrice: 399, stock: 2 },
+  ],
 };
 
 const BasicCompound: React.FC = () => {
@@ -80,9 +91,18 @@ const BasicCompound: React.FC = () => {
 
               <ProductCard.Section title="选择属性" />
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                <ProductCard.ColorSwatches />
-                <ProductCard.SizeSelector />
-                <ProductCard.OptionPicker name="材质" options={["网面", "皮革", "织物"]} />
+                {/* 统一属性键名与变体一致，让选择影响 SKU 匹配 */}
+                <ProductCard.ColorSwatches
+                  attributeName="颜色"
+                  colors={[
+                    { name: "蓝", hex: "#1e90ff" },
+                    { name: "红", hex: "#ff4757" },
+                    { name: "绿", hex: "#2ed573" },
+                  ]}
+                />
+                <ProductCard.SizeSelector attributeName="尺码" sizes={["38", "39", "40"]} />
+                {/* 若该属性不参与 SKU 组合，避免写入以免影响变体匹配 */}
+                {/* <ProductCard.OptionPicker name="材质" options={["网面", "皮革", "织物"]} /> */}
                 <ProductCard.VariantSelector />
               </div>
 
