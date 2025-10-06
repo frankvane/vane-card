@@ -35,6 +35,20 @@ const Stepper: React.FC<{
   const dec = () => setQ(q - step);
   const inc = () => setQ(q + step);
 
+  // 当规格切换时重置数量到默认值；当库存上限缩小时自动钳制
+  const variantSku = (context.bus?.getData?.("sku.variant") as { sku?: string } | undefined)?.sku;
+  const prevSkuRef = React.useRef<string | undefined>(variantSku);
+  React.useEffect(() => {
+    if (prevSkuRef.current !== variantSku) {
+      prevSkuRef.current = variantSku;
+      setQ(min);
+    }
+  }, [variantSku, min]);
+
+  React.useEffect(() => {
+    if (q > max) setQ(max);
+  }, [max]);
+
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
       <span style={{ fontSize: 12, color: "#666" }}>数量</span>
