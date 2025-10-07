@@ -98,16 +98,30 @@ export const createComparePricePlugin: PluginCreator<any, ComparePricePluginConf
         if (!isFinite(lowest)) return null;
         const diff = currentPrice - lowest;
         const isLower = diff < 0;
-        const color = isLower ? "#388e3c" : "#d0021b";
+        const color = isLower ? "#1b5e20" : "#a52714";
         const label = isLower ? `低于最低价 ¥${Math.round(Math.abs(diff))}` : `最低价 ¥${lowest}`;
         return (
-          <span style={{ fontSize: 12, color, fontWeight: 600 }} title="平台比价">
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              fontSize: 12,
+              fontWeight: 700,
+              color,
+              background: isLower ? "#E8F5E9" : "#FFF3F3",
+              border: `1px solid ${isLower ? "#C8E6C9" : "#F5C6CB"}`,
+              borderRadius: 12,
+              padding: "2px 6px",
+              marginLeft: 6,
+            }}
+            title="平台比价"
+          >
             {label}
           </span>
         );
       },
     },
-    config,
+    config: { ...config, order: 20 },
   };
 
   return plugin;

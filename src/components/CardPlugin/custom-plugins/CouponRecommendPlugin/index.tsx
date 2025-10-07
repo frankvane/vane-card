@@ -14,6 +14,7 @@ export interface CouponRecommendPluginConfig {
   autoApplyBest?: boolean; // 是否自动应用最佳券
   currency?: string;
   locale?: string;
+  order?: number; // priceArea 渲染顺序
 }
 
 function formatCurrency(value: number, currency?: string, locale?: string) {
@@ -43,6 +44,7 @@ export const createCouponRecommendPlugin: PluginCreator<any, CouponRecommendPlug
     autoApplyBest: false,
     currency: "CNY",
     locale: "zh-CN",
+    order: 30,
   });
 
   const plugin: CardPlugin = {
@@ -111,6 +113,41 @@ export const createCouponRecommendPlugin: PluginCreator<any, CouponRecommendPlug
               <button onClick={applyBest} style={{ marginLeft: "auto", padding: "4px 10px", borderRadius: 6, border: "1px solid #c8e6c9", background: "#c8e6c9", color: "#2e7d32" }}>使用</button>
             </div>
           </div>
+        );
+      },
+      renderPriceArea: (context) => {
+        if (!cfg.coupons.length) return null;
+        const price = Number((context.bus?.getData?.(BusKeys.skuPrice) as any) ?? (context.data as any)?.price ?? 0);
+        const qty = Number(context.bus?.getData?.(BusKeys.quantity) ?? 1);
+        const subtotal = price * qty;
+        const applied = context.bus?.getData?.(BusKeys.couponApplied) as Coupon | undefined;
+        const best = pickBestCoupon(cfg.coupons, subtotal);
+
+        const isBetter = best && (!applied || (best.discount ?? 0) > (applied.discount ?? 0));
+        if (!best || !isBetter) return null;
+
+        const delta = Math.max(0, (best.discount ?? 0) - (applied?.discount ?? 0));
+        const applyBest = () => context.bus?.setData?.(BusKeys.couponApplied, best);
+        return (
+          <span
+            onClick={applyBest}
+            title={`更优优惠券：${best.code}`}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              fontSize: 12,
+              color: "#1b5e20",
+              background: "#E8F5E9",
+              border: "1px solid #C8E6C9",
+              borderRadius: 12,
+              padding: "2px 8px",
+              cursor: "pointer",
+              marginLeft: 6,
+            }}
+          >
+            可领券再省 {formatCurrency(delta, cfg.currency, cfg.locale)}
+          </span>
         );
       },
     },

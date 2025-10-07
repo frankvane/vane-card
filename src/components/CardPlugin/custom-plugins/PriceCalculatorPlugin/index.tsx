@@ -11,9 +11,11 @@ export interface PriceCalculatorPluginConfig {
   showOriginalPrice?: boolean;
   showDiscount?: boolean; // 显示折扣百分比
   showSavings?: boolean; // 显示节省金额
+  showSavingsBadgeInPriceArea?: boolean; // 在价格区域显示节省徽章
   showTotalPrice?: boolean; // 显示按数量与优惠后的合计
   currency?: string; // 如 CNY, USD
   locale?: string; // 如 zh-CN, en-US
+  order?: number; // priceArea 渲染顺序
 }
 
 function formatCurrency(value: number, currency?: string, locale?: string) {
@@ -35,9 +37,11 @@ export const createPriceCalculatorPlugin: PluginCreator<any, PriceCalculatorPlug
     showOriginalPrice: true,
     showDiscount: true,
     showSavings: true,
+    showSavingsBadgeInPriceArea: true,
     showTotalPrice: false,
     currency: "CNY",
     locale: "zh-CN",
+    order: 10,
   });
 
   const plugin: CardPlugin = {
@@ -68,9 +72,15 @@ export const createPriceCalculatorPlugin: PluginCreator<any, PriceCalculatorPlug
         recalc();
         // 卸载清理
         return () => {
-          try { off1 && off1(); } catch {}
-          try { off2 && off2(); } catch {}
-          try { off3 && off3(); } catch {}
+          if (off1) {
+            try { off1(); } catch {}
+          }
+          if (off2) {
+            try { off2(); } catch {}
+          }
+          if (off3) {
+            try { off3(); } catch {}
+          }
         };
       },
       renderFooter: (context) => {
@@ -129,12 +139,39 @@ export const createPriceCalculatorPlugin: PluginCreator<any, PriceCalculatorPlug
         const originalPrice = Number((context.data as any)?.originalPrice || 0);
         const hasOriginal = cfg.showOriginalPrice && originalPrice > price && originalPrice > 0;
         const discount = hasOriginal ? Math.round((1 - price / originalPrice) * 100) : 0;
-        if (!hasOriginal || !cfg.showDiscount || discount <= 0) return null;
-        return (
-          <span style={{ fontSize: 12, color: "#388e3c", fontWeight: 700 }} title="折扣">
-            -{discount}%
-          </span>
-        );
+        const savings = hasOriginal ? originalPrice - price : 0;
+        if (!hasOriginal) return null;
+        const nodes: React.ReactNode[] = [];
+        if (cfg.showDiscount && discount > 0) {
+          nodes.push(
+            <span key="discount" style={{ fontSize: 12, color: "#388e3c", fontWeight: 700 }} title="折扣">
+              -{discount}%
+            </span>
+          );
+        }
+        if (cfg.showSavingsBadgeInPriceArea && savings > 0) {
+          nodes.push(
+            <span
+              key="savings"
+              title="已省"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                fontSize: 12,
+                color: "#1b5e20",
+                background: "#E8F5E9",
+                border: "1px solid #C8E6C9",
+                borderRadius: 12,
+                padding: "2px 6px",
+                marginLeft: 6,
+              }}
+            >
+              省 {formatCurrency(savings, cfg.currency, cfg.locale)}
+            </span>
+          );
+        }
+        if (!nodes.length) return null;
+        return <>{nodes}</>;
       },
     },
     config: cfg,
