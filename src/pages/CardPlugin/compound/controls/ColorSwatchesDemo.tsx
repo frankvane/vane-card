@@ -1,6 +1,6 @@
-import React from "react";
 import DemoPage from "../../_layout/DemoPage";
 import { ProductCard } from "../../../../components/CardPlugin";
+import React from "react";
 
 const product = {
   id: "ctrl-color-01",
@@ -9,7 +9,7 @@ const product = {
   price: 299,
   oldPrice: 359,
   image:
-    "https://images.unsplash.com/photo-1520974723455-1a04357b8cca?q=80&w=800&auto=format&fit=crop",
+    "https://picsum.photos/seed/color-black/800/600",
   colors: [
     { name: "黑", hex: "#222" },
     { name: "蓝", hex: "#1e90ff" },

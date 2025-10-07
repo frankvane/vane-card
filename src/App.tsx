@@ -45,10 +45,10 @@ import TopBottomCompound from "./pages/CardPlugin/compound/layouts/TopBottomComp
 import TwoColumnLayout from "./pages/CardPlugin/layouts/TwoColumnLayout";
 import UpsellBundleDemo from "./pages/CardPlugin/compound/commerce-combo/UpsellBundleDemo";
 import VariantMediaSwitcherDemo from "./pages/CardPlugin/compound/controls/VariantMediaSwitcherDemo";
+import VariantSelectorActionsDemo from "./pages/CardPlugin/compound/controls/VariantSelectorActionsDemo";
 import VariantSelectorDemo from "./pages/CardPlugin/compound/controls/VariantSelectorDemo";
 import VariantSelectorMediaComboDemo from "./pages/CardPlugin/compound/controls/VariantSelectorMediaComboDemo";
 import VariantSelectorPriceInventoryDemo from "./pages/CardPlugin/compound/controls/VariantSelectorPriceInventoryDemo";
-import VariantSelectorActionsDemo from "./pages/CardPlugin/compound/controls/VariantSelectorActionsDemo";
 import VerticalLayout from "./pages/CardPlugin/layouts/VerticalLayout";
 
 const App: React.FC = () => {
@@ -60,6 +60,82 @@ const App: React.FC = () => {
           <NavLink to="/" end>
             首页
           </NavLink>
+
+ <h3 style={{ marginTop: 12 }}>复合组件专区</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <NavLink to="/compound/ui-display/title-description">
+              UI：标题+描述
+            </NavLink>
+            <NavLink to="/compound/ui-display/media-desc">
+              UI：媒体与描述
+            </NavLink>
+            <NavLink to="/compound/ui-display/price-labels">
+              UI：价格标示
+            </NavLink>
+            <NavLink to="/compound/ui-display/savings-badge">
+              UI：节省金额徽章
+            </NavLink>
+            <NavLink to="/compound/ui-display/stock-badge">
+              UI：库存提示徽章
+            </NavLink>
+            <NavLink to="/compound/ui-display/coupon-bar">
+              UI：优惠信息条
+            </NavLink>
+            <NavLink to="/compound/state/state-display">状态：派生展示</NavLink>
+            <NavLink to="/compound/controls/variant-selector">
+              控件：规格选择
+            </NavLink>
+            <NavLink to="/compound/controls/variant-selector-media">
+              控件：规格+主图联动
+            </NavLink>
+            <NavLink to="/compound/controls/variant-selector-price-inventory">
+              控件：规格+价格/库存联动
+            </NavLink>
+            <NavLink to="/compound/controls/variant-selector-actions">
+              控件：规格+操作联动
+            </NavLink>
+            <NavLink to="/compound/controls/variant-media-switcher">
+              控件：规格切换主图
+            </NavLink>
+            <NavLink to="/compound/controls/color-swatches">
+              控件：颜色选择
+            </NavLink>
+            <NavLink to="/compound/controls/size-selector">
+              控件：尺码选择
+            </NavLink>
+            <NavLink to="/compound/controls/option-picker">
+              控件：通用属性
+            </NavLink>
+            <NavLink to="/compound/controls/quantity-stepper">
+              控件：数量步进
+            </NavLink>
+            <NavLink to="/compound/commerce-combo/order-summary">
+              组合：订单明细面板
+            </NavLink>
+            <NavLink to="/compound/commerce-combo/upsell-bundle">
+              组合：搭配购
+            </NavLink>
+            <NavLink to="/compound/logistics/shipping-estimator">
+              物流：配送费估算
+            </NavLink>
+            <NavLink to="/compound/logistics/delivery-timeline">
+              物流：配送时间线
+            </NavLink>
+            <NavLink to="/compound/logistics/return-policy">
+              物流：退换政策
+            </NavLink>
+            <NavLink to="/compound/a11y/toolbar">可访问性工具栏</NavLink>
+            <NavLink to="/compound/a11y/actions">可访问性：操作区</NavLink>
+
+            <NavLink to="/compound/basic">基础应用</NavLink>
+            <NavLink to="/compound/left-right">左右布局</NavLink>
+            <NavLink to="/compound/top-bottom">上下布局</NavLink>
+            <NavLink to="/compound/enhanced">增强：复合组件+插件</NavLink>
+            <NavLink to="/compound/sku-compound/ecommerce-sku">
+              电商增强 + SKU
+            </NavLink>
+          </div>
+
 
           <h3 style={{ marginTop: 12 }}>布局专区</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -91,37 +167,7 @@ const App: React.FC = () => {
             <NavLink to="/slots/responsive">Responsive</NavLink>
           </div>
 
-          <h3 style={{ marginTop: 12 }}>复合组件专区</h3>
-          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <NavLink to="/compound/basic">基础应用</NavLink>
-            <NavLink to="/compound/left-right">左右布局</NavLink>
-            <NavLink to="/compound/top-bottom">上下布局</NavLink>
-            <NavLink to="/compound/enhanced">增强：复合组件+插件</NavLink>
-            <NavLink to="/compound/sku-compound/ecommerce-sku">电商增强 + SKU</NavLink>
-            <NavLink to="/compound/ui-display/title-description">UI：标题+描述</NavLink>
-            <NavLink to="/compound/ui-display/media-desc">UI：媒体与描述</NavLink>
-            <NavLink to="/compound/ui-display/price-labels">UI：价格标示</NavLink>
-            <NavLink to="/compound/ui-display/savings-badge">UI：节省金额徽章</NavLink>
-            <NavLink to="/compound/ui-display/stock-badge">UI：库存提示徽章</NavLink>
-            <NavLink to="/compound/ui-display/coupon-bar">UI：优惠信息条</NavLink>
-            <NavLink to="/compound/state/state-display">状态：派生展示</NavLink>
-            <NavLink to="/compound/controls/variant-selector">控件：规格选择</NavLink>
-            <NavLink to="/compound/controls/variant-selector-media">控件：规格+主图联动</NavLink>
-            <NavLink to="/compound/controls/variant-selector-price-inventory">控件：规格+价格/库存联动</NavLink>
-            <NavLink to="/compound/controls/variant-selector-actions">控件：规格+操作联动</NavLink>
-            <NavLink to="/compound/controls/variant-media-switcher">控件：规格切换主图</NavLink>
-            <NavLink to="/compound/controls/color-swatches">控件：颜色选择</NavLink>
-            <NavLink to="/compound/controls/size-selector">控件：尺码选择</NavLink>
-            <NavLink to="/compound/controls/option-picker">控件：通用属性</NavLink>
-            <NavLink to="/compound/controls/quantity-stepper">控件：数量步进</NavLink>
-            <NavLink to="/compound/commerce-combo/order-summary">组合：订单明细面板</NavLink>
-            <NavLink to="/compound/commerce-combo/upsell-bundle">组合：搭配购</NavLink>
-            <NavLink to="/compound/logistics/shipping-estimator">物流：配送费估算</NavLink>
-            <NavLink to="/compound/logistics/delivery-timeline">物流：配送时间线</NavLink>
-            <NavLink to="/compound/logistics/return-policy">物流：退换政策</NavLink>
-            <NavLink to="/compound/a11y/toolbar">可访问性工具栏</NavLink>
-            <NavLink to="/compound/a11y/actions">可访问性：操作区</NavLink>
-          </div>
+
         </nav>
       </aside>
       <main className="main">
@@ -138,10 +184,7 @@ const App: React.FC = () => {
             path="/slots/footer-actions"
             element={<FooterActionsSlots />}
           />
-          <Route
-            path="/slots/gallery-video"
-            element={<GalleryVideoSlots />}
-          />
+          <Route path="/slots/gallery-video" element={<GalleryVideoSlots />} />
           <Route path="/slots/responsive" element={<ResponsiveSlots />} />
 
           {/* 布局专区路由 */}
@@ -181,36 +224,96 @@ const App: React.FC = () => {
           />
           <Route path="/compound/left-right" element={<LeftRightCompound />} />
           <Route path="/compound/top-bottom" element={<TopBottomCompound />} />
-          <Route path="/compound/sku-compound/ecommerce-sku" element={<EcommerceSKUCompound />} />
+          <Route
+            path="/compound/sku-compound/ecommerce-sku"
+            element={<EcommerceSKUCompound />}
+          />
           <Route
             path="/compound/ui-display/title-description"
             element={<TitleDescriptionDemo />}
           />
-          <Route path="/compound/ui-display/media-desc" element={<MediaAndDescDemo />} />
-          <Route path="/compound/ui-display/price-labels" element={<PriceLabelsDemo />} />
-          <Route path="/compound/ui-display/savings-badge" element={<SavingsBadgeDemo />} />
-          <Route path="/compound/ui-display/stock-badge" element={<StockBadgeDemo />} />
-          <Route path="/compound/ui-display/coupon-bar" element={<CouponBarDemo />} />
-          <Route path="/compound/state/state-display" element={<StateDisplayDemo />} />
+          <Route
+            path="/compound/ui-display/media-desc"
+            element={<MediaAndDescDemo />}
+          />
+          <Route
+            path="/compound/ui-display/price-labels"
+            element={<PriceLabelsDemo />}
+          />
+          <Route
+            path="/compound/ui-display/savings-badge"
+            element={<SavingsBadgeDemo />}
+          />
+          <Route
+            path="/compound/ui-display/stock-badge"
+            element={<StockBadgeDemo />}
+          />
+          <Route
+            path="/compound/ui-display/coupon-bar"
+            element={<CouponBarDemo />}
+          />
+          <Route
+            path="/compound/state/state-display"
+            element={<StateDisplayDemo />}
+          />
           <Route
             path="/compound/controls/variant-selector"
             element={<VariantSelectorDemo />}
           />
-          <Route path="/compound/controls/variant-selector-media" element={<VariantSelectorMediaComboDemo />} />
-          <Route path="/compound/controls/variant-selector-price-inventory" element={<VariantSelectorPriceInventoryDemo />} />
-          <Route path="/compound/controls/variant-selector-actions" element={<VariantSelectorActionsDemo />} />
-          <Route path="/compound/controls/variant-media-switcher" element={<VariantMediaSwitcherDemo />} />
-          <Route path="/compound/controls/color-swatches" element={<ColorSwatchesDemo />} />
-          <Route path="/compound/controls/size-selector" element={<SizeSelectorDemo />} />
-          <Route path="/compound/controls/option-picker" element={<OptionPickerDemo />} />
-          <Route path="/compound/controls/quantity-stepper" element={<QuantityStepperDemo />} />
-          <Route path="/compound/commerce-combo/order-summary" element={<OrderSummaryDemo />} />
-          <Route path="/compound/commerce-combo/upsell-bundle" element={<UpsellBundleDemo />} />
-          <Route path="/compound/logistics/shipping-estimator" element={<ShippingEstimatorDemo />} />
-          <Route path="/compound/logistics/delivery-timeline" element={<DeliveryTimelineDemo />} />
-          <Route path="/compound/logistics/return-policy" element={<ReturnPolicyDemo />} />
-            <Route path="/compound/a11y/toolbar" element={<A11yToolbarDemo />} />
-            <Route path="/compound/a11y/actions" element={<ActionsDemo />} />
+          <Route
+            path="/compound/controls/variant-selector-media"
+            element={<VariantSelectorMediaComboDemo />}
+          />
+          <Route
+            path="/compound/controls/variant-selector-price-inventory"
+            element={<VariantSelectorPriceInventoryDemo />}
+          />
+          <Route
+            path="/compound/controls/variant-selector-actions"
+            element={<VariantSelectorActionsDemo />}
+          />
+          <Route
+            path="/compound/controls/variant-media-switcher"
+            element={<VariantMediaSwitcherDemo />}
+          />
+          <Route
+            path="/compound/controls/color-swatches"
+            element={<ColorSwatchesDemo />}
+          />
+          <Route
+            path="/compound/controls/size-selector"
+            element={<SizeSelectorDemo />}
+          />
+          <Route
+            path="/compound/controls/option-picker"
+            element={<OptionPickerDemo />}
+          />
+          <Route
+            path="/compound/controls/quantity-stepper"
+            element={<QuantityStepperDemo />}
+          />
+          <Route
+            path="/compound/commerce-combo/order-summary"
+            element={<OrderSummaryDemo />}
+          />
+          <Route
+            path="/compound/commerce-combo/upsell-bundle"
+            element={<UpsellBundleDemo />}
+          />
+          <Route
+            path="/compound/logistics/shipping-estimator"
+            element={<ShippingEstimatorDemo />}
+          />
+          <Route
+            path="/compound/logistics/delivery-timeline"
+            element={<DeliveryTimelineDemo />}
+          />
+          <Route
+            path="/compound/logistics/return-policy"
+            element={<ReturnPolicyDemo />}
+          />
+          <Route path="/compound/a11y/toolbar" element={<A11yToolbarDemo />} />
+          <Route path="/compound/a11y/actions" element={<ActionsDemo />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
