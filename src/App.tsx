@@ -12,17 +12,27 @@ import BasicCompound from "./pages/CardPlugin/compound/BasicCompound";
 import BasicSlots from "./pages/CardPlugin/slots/BasicSlots";
 import BottomImageLayout from "./pages/CardPlugin/layouts/BottomImageLayout";
 import CardHome from "./pages/CardPlugin/Home";
+import EcommerceSKUCompound from "./pages/CardPlugin/compound/EcommerceSKUCompound";
 import FooterActionsSlots from "./pages/CardPlugin/slots/FooterActionsSlots";
+import GalleryVideoSlots from "./pages/CardPlugin/slots/GalleryVideoSlots";
 import GridLayout from "./pages/CardPlugin/layouts/GridLayout";
 import HeaderOverlaySlots from "./pages/CardPlugin/slots/HeaderOverlaySlots";
-import GalleryVideoSlots from "./pages/CardPlugin/slots/GalleryVideoSlots";
-import ResponsiveSlots from "./pages/CardPlugin/slots/ResponsiveSlots";
 import HorizontalLayout from "./pages/CardPlugin/layouts/HorizontalLayout";
 import LeftRightCompound from "./pages/CardPlugin/compound/LeftRightCompound";
 import MinimalLayout from "./pages/CardPlugin/layouts/MinimalLayout";
+import OrderSummaryDemo from "./pages/CardPlugin/compound/OrderSummaryDemo";
+import SavingsBadgeDemo from "./pages/CardPlugin/compound/SavingsBadgeDemo";
+import StockBadgeDemo from "./pages/CardPlugin/compound/StockBadgeDemo";
+import CouponBarDemo from "./pages/CardPlugin/compound/CouponBarDemo";
+import VariantMediaSwitcherDemo from "./pages/CardPlugin/compound/VariantMediaSwitcherDemo";
+import ShippingEstimatorDemo from "./pages/CardPlugin/compound/ShippingEstimatorDemo";
+import DeliveryTimelineDemo from "./pages/CardPlugin/compound/DeliveryTimelineDemo";
+import ReturnPolicyDemo from "./pages/CardPlugin/compound/ReturnPolicyDemo";
+import UpsellBundleDemo from "./pages/CardPlugin/compound/UpsellBundleDemo";
+import A11yToolbarDemo from "./pages/CardPlugin/compound/A11yToolbarDemo";
 import PluginEnhancedCompound from "./pages/CardPlugin/compound/PluginEnhancedCompound";
-import EcommerceSKUCompound from "./pages/CardPlugin/compound/EcommerceSKUCompound";
 import React from "react";
+import ResponsiveSlots from "./pages/CardPlugin/slots/ResponsiveSlots";
 import RightImageLayout from "./pages/CardPlugin/layouts/RightImageLayout";
 import TopBottomCompound from "./pages/CardPlugin/compound/TopBottomCompound";
 import TwoColumnLayout from "./pages/CardPlugin/layouts/TwoColumnLayout";
@@ -75,6 +85,16 @@ const App: React.FC = () => {
             <NavLink to="/compound/top-bottom">上下布局</NavLink>
             <NavLink to="/compound/enhanced">增强：复合组件+插件</NavLink>
             <NavLink to="/compound/ecommerce-sku">电商增强 + SKU</NavLink>
+            <NavLink to="/compound/order-summary">订单明细面板</NavLink>
+            <NavLink to="/compound/savings-badge">节省金额徽章</NavLink>
+            <NavLink to="/compound/stock-badge">库存提示徽章</NavLink>
+            <NavLink to="/compound/coupon-bar">优惠信息条</NavLink>
+            <NavLink to="/compound/variant-media-switcher">规格切换主图</NavLink>
+            <NavLink to="/compound/shipping-estimator">配送费估算</NavLink>
+            <NavLink to="/compound/delivery-timeline">配送时间线</NavLink>
+            <NavLink to="/compound/return-policy">退换政策</NavLink>
+            <NavLink to="/compound/upsell-bundle">搭配购</NavLink>
+            <NavLink to="/compound/a11y-toolbar">可访问性工具栏</NavLink>
           </div>
         </nav>
       </aside>
@@ -136,6 +156,16 @@ const App: React.FC = () => {
           <Route path="/compound/left-right" element={<LeftRightCompound />} />
           <Route path="/compound/top-bottom" element={<TopBottomCompound />} />
           <Route path="/compound/ecommerce-sku" element={<EcommerceSKUCompound />} />
+          <Route path="/compound/order-summary" element={<OrderSummaryDemo />} />
+            <Route path="/compound/savings-badge" element={<SavingsBadgeDemo />} />
+            <Route path="/compound/stock-badge" element={<StockBadgeDemo />} />
+            <Route path="/compound/coupon-bar" element={<CouponBarDemo />} />
+            <Route path="/compound/variant-media-switcher" element={<VariantMediaSwitcherDemo />} />
+            <Route path="/compound/shipping-estimator" element={<ShippingEstimatorDemo />} />
+            <Route path="/compound/delivery-timeline" element={<DeliveryTimelineDemo />} />
+            <Route path="/compound/return-policy" element={<ReturnPolicyDemo />} />
+            <Route path="/compound/upsell-bundle" element={<UpsellBundleDemo />} />
+            <Route path="/compound/a11y-toolbar" element={<A11yToolbarDemo />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
