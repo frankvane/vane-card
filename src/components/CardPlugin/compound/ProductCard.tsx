@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
+
 import CardCore from "../core/CardCore";
-import { withPlugins } from "../plugins/withPlugins";
 import type { CardPlugin } from "../plugins";
+import { withPlugins } from "../plugins/withPlugins";
 
 export type ProductCardState = {
   cart: Record<string, number>;

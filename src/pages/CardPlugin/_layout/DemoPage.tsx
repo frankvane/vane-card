@@ -157,6 +157,7 @@ const DemoPage: React.FC<DemoPageProps> = ({
 }) => {
   const location = useLocation();
   const [sourceCode, setSourceCode] = useState<string>("");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const loadSourceCode = async () => {
@@ -193,6 +194,30 @@ const DemoPage: React.FC<DemoPageProps> = ({
       {sourceCode && (
         <div className="page-card" style={{ marginTop: "20px" }}>
           <h2 style={{ marginBottom: "10px", fontSize: "1.2em" }}>源码</h2>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
+            <button
+              type="button"
+              aria-label="复制源码"
+              onClick={() => {
+                if (!sourceCode) return;
+                navigator.clipboard?.writeText(sourceCode).then(() => {
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 1500);
+                });
+              }}
+              id="copy-code-btn"
+              style={{
+                padding: "6px 10px",
+                fontSize: 12,
+                border: "1px solid #ddd",
+                borderRadius: 6,
+                background: "#f7f7f7",
+                cursor: "pointer",
+              }}
+            >
+              {copied ? "已复制" : "复制"}
+            </button>
+          </div>
           <SyntaxHighlighter
             language="tsx"
             style={tomorrow}
