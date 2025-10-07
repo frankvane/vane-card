@@ -1,11 +1,11 @@
 import {
   ProductCard,
-  createSKUPlugin,
-  createQuantityPlugin,
   createPriceCalculatorPlugin,
-} from "../../../components/CardPlugin";
+  createQuantityPlugin,
+  createSKUPlugin,
+} from "../../../../components/CardPlugin";
 
-import DemoPage from "../_layout/DemoPage";
+import DemoPage from "../../_layout/DemoPage";
 import React from "react";
 
 const productData = {

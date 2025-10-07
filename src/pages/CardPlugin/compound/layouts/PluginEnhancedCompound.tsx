@@ -9,9 +9,9 @@ import {
   createResponsivePlugin,
   createReviewPlugin,
   createVideoPlugin,
-} from "../../../components/CardPlugin";
+} from "../../../../components/CardPlugin";
 
-import DemoPage from "../_layout/DemoPage";
+import DemoPage from "../../_layout/DemoPage";
 import React from "react";
 
 const mockProductB = {

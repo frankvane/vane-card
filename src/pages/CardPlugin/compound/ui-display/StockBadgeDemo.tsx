@@ -1,11 +1,11 @@
 import {
   ProductCard,
-  createSKUPlugin,
-  createQuantityPlugin,
   createInventoryPlugin,
-} from "../../../components/CardPlugin";
+  createQuantityPlugin,
+  createSKUPlugin,
+} from "../../../../components/CardPlugin";
 
-import DemoPage from "../_layout/DemoPage";
+import DemoPage from "../../_layout/DemoPage";
 import React from "react";
 
 const productData = {
@@ -52,7 +52,7 @@ const StockBadgeDemo: React.FC = () => {
             data={productData}
             plugins={[
               createSKUPlugin({ attributes, variants, renderIn: "footer" }),
-              createInventoryPlugin({ showStock: true }),
+              createInventoryPlugin({}),
             ]}
           >
             <ProductCard.Image style={{ width: "100%", aspectRatio: "4 / 3", borderRadius: 8 }} />
@@ -214,24 +214,24 @@ const StockBadgeDemo: React.FC = () => {
           <h3 style={{ margin: "0 0 16px 0", fontSize: 16, color: "#333" }}>自定义文本</h3>
           <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
             <ProductCard productId="demo-custom-text-1" data={{ ...productData, inventory: 0 }}>
-              <ProductCard.StockBadge 
-                outOfStockText="售罄" 
-                lowStockText="仅剩少量" 
+              <ProductCard.StockBadge
+                outOfStockText="售罄"
+                lowStockText="仅剩少量"
                 inStockText="有货"
               />
             </ProductCard>
             <ProductCard productId="demo-custom-text-2" data={{ ...productData, inventory: 3 }}>
-              <ProductCard.StockBadge 
-                outOfStockText="售罄" 
-                lowStockText="仅剩少量" 
+              <ProductCard.StockBadge
+                outOfStockText="售罄"
+                lowStockText="仅剩少量"
                 inStockText="有货"
                 showQuantity={true}
               />
             </ProductCard>
             <ProductCard productId="demo-custom-text-3" data={{ ...productData, inventory: 50 }}>
-              <ProductCard.StockBadge 
-                outOfStockText="售罄" 
-                lowStockText="仅剩少量" 
+              <ProductCard.StockBadge
+                outOfStockText="售罄"
+                lowStockText="仅剩少量"
                 inStockText="有货"
               />
             </ProductCard>

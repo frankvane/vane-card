@@ -1,13 +1,13 @@
 import {
   ProductCard,
-  createSKUPlugin,
-  createQuantityPlugin,
   createPriceCalculatorPlugin,
-} from "../../../components/CardPlugin";
-
-import DemoPage from "../_layout/DemoPage";
+  createQuantityPlugin,
+  createSKUPlugin,
+} from "../../../../components/CardPlugin";
 import React, { useState } from "react";
-import type { OrderSummary } from "../../../components/CardPlugin";
+
+import DemoPage from "../../_layout/DemoPage";
+import type { OrderSummary } from "../../../../components/CardPlugin";
 
 const productData = {
   id: "order-summary-demo",
@@ -40,6 +40,15 @@ const variants = [
 const OrderSummaryDemo: React.FC = () => {
   const [orderSummary, setOrderSummary] = useState<OrderSummary | null>(null);
 
+  // 避免因父组件状态更新导致插件数组重建，从而触发子卡片的重复初始化与状态变更
+  const rightPlugins = React.useMemo(
+    () => [
+      createSKUPlugin({ attributes, variants }),
+      createQuantityPlugin({ min: 1, max: 10 }),
+    ],
+    []
+  );
+
   return (
     <DemoPage
       title="订单明细面板 - OrderSummaryPanel"
@@ -52,27 +61,21 @@ const OrderSummaryDemo: React.FC = () => {
             productId={productData.id}
             data={productData}
             plugins={[
-              createSKUPlugin({ 
-                attributes, 
-                variants, 
+              createSKUPlugin({
+                attributes,
+                variants,
                 renderIn: "footer",
-                onVariantChange: (variant) => {
-                  console.log("规格变更:", variant);
-                }
               }),
-              createQuantityPlugin({ 
-                renderIn: "footer", 
-                min: 1, 
+              createQuantityPlugin({
+                renderIn: "footer",
+                min: 1,
                 max: 10,
-                resetOnVariantChange: true,
-                onQuantityChange: (quantity) => {
-                  console.log("数量变更:", quantity);
-                }
+                resetOnVariantChange: true
               }),
-              createPriceCalculatorPlugin({ 
-                showOriginalPrice: true, 
-                currency: "CNY", 
-                showTotalPrice: true 
+              createPriceCalculatorPlugin({
+                showOriginalPrice: true,
+                currency: "CNY",
+                showTotalPrice: true
               }),
             ]}
           >
@@ -97,10 +100,7 @@ const OrderSummaryDemo: React.FC = () => {
           <ProductCard
             productId={productData.id}
             data={productData}
-            plugins={[
-              createSKUPlugin({ attributes, variants }),
-              createQuantityPlugin({ min: 1, max: 10 }),
-            ]}
+            plugins={rightPlugins}
           >
             <ProductCard.OrderSummaryPanel
               showTax={true}

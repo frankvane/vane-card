@@ -8,6 +8,10 @@ type DemoPageProps = {
   title: string;
   description?: string;
   children: React.ReactNode;
+  // 可选：手动指定源码映射键，覆盖路由推导
+  sourceKey?: string;
+  // 可选：显示用的文件路径（不影响加载），便于文档展示
+  routeFileName?: string;
 };
 
 // 路由路径到文件名的映射
@@ -30,11 +34,34 @@ const routeToFileMap: Record<string, string> = {
   "/layouts/minimal": "layouts/MinimalLayout",
   "/layouts/background": "layouts/BackgroundImageLayout",
   "/layouts/two-column": "layouts/TwoColumnLayout",
-  "/compound/basic": "compound/BasicCompound",
-  "/compound/enhanced": "compound/PluginEnhancedCompound",
-  "/compound/left-right": "compound/LeftRightCompound",
-  "/compound/top-bottom": "compound/TopBottomCompound",
-  "/compound/ecommerce-sku": "compound/EcommerceSKUCompound",
+  "/compound/basic": "compound/layouts/BasicCompound",
+  "/compound/enhanced": "compound/layouts/PluginEnhancedCompound",
+  "/compound/left-right": "compound/layouts/LeftRightCompound",
+  "/compound/top-bottom": "compound/layouts/TopBottomCompound",
+  "/compound/sku-compound/ecommerce-sku": "compound/sku-compound/EcommerceSKUCompound",
+  "/compound/ui-display/title-description": "compound/ui-display/TitleDescriptionDemo",
+  "/compound/ui-display/media-desc": "compound/ui-display/MediaAndDescDemo",
+  "/compound/ui-display/price-labels": "compound/ui-display/PriceLabelsDemo",
+  "/compound/ui-display/savings-badge": "compound/ui-display/SavingsBadgeDemo",
+  "/compound/ui-display/stock-badge": "compound/ui-display/StockBadgeDemo",
+  "/compound/ui-display/coupon-bar": "compound/ui-display/CouponBarDemo",
+  "/compound/controls/variant-selector": "compound/controls/VariantSelectorDemo",
+  "/compound/controls/variant-selector-media": "compound/controls/VariantSelectorMediaComboDemo",
+  "/compound/controls/variant-selector-price-inventory": "compound/controls/VariantSelectorPriceInventoryDemo",
+  "/compound/controls/variant-selector-actions": "compound/controls/VariantSelectorActionsDemo",
+  "/compound/controls/variant-media-switcher": "compound/controls/VariantMediaSwitcherDemo",
+  "/compound/controls/color-swatches": "compound/controls/ColorSwatchesDemo",
+  "/compound/controls/size-selector": "compound/controls/SizeSelectorDemo",
+  "/compound/controls/option-picker": "compound/controls/OptionPickerDemo",
+  "/compound/state/state-display": "compound/state/StateDisplayDemo",
+  "/compound/controls/quantity-stepper": "compound/controls/QuantityStepperDemo",
+  "/compound/a11y/actions": "compound/a11y/ActionsDemo",
+  "/compound/a11y/toolbar": "compound/a11y/A11yToolbarDemo",
+  "/compound/logistics/shipping-estimator": "compound/logistics/ShippingEstimatorDemo",
+  "/compound/logistics/delivery-timeline": "compound/logistics/DeliveryTimelineDemo",
+  "/compound/logistics/return-policy": "compound/logistics/ReturnPolicyDemo",
+  "/compound/commerce-combo/upsell-bundle": "compound/commerce-combo/UpsellBundleDemo",
+  "/compound/commerce-combo/order-summary": "compound/commerce-combo/OrderSummaryDemo",
   "/slots/responsive": "slots/ResponsiveSlots",
   "/slots/gallery-video": "slots/GalleryVideoSlots",
 };
@@ -66,12 +93,58 @@ const fileLoaderMap: Record<string, () => Promise<{ default: string }>> = {
   "layouts/BackgroundImageLayout": () =>
     import("../layouts/BackgroundImageLayout.tsx?raw"),
   "layouts/TwoColumnLayout": () => import("../layouts/TwoColumnLayout.tsx?raw"),
-  "compound/BasicCompound": () => import("../compound/BasicCompound.tsx?raw"),
-  "compound/PluginEnhancedCompound": () =>
-    import("../compound/PluginEnhancedCompound.tsx?raw"),
-  "compound/LeftRightCompound": () => import("../compound/LeftRightCompound.tsx?raw"),
-  "compound/TopBottomCompound": () => import("../compound/TopBottomCompound.tsx?raw"),
-  "compound/EcommerceSKUCompound": () => import("../compound/EcommerceSKUCompound.tsx?raw"),
+  "compound/layouts/BasicCompound": () => import("../compound/layouts/BasicCompound.tsx?raw"),
+  "compound/layouts/PluginEnhancedCompound": () =>
+    import("../compound/layouts/PluginEnhancedCompound.tsx?raw"),
+  "compound/layouts/LeftRightCompound": () => import("../compound/layouts/LeftRightCompound.tsx?raw"),
+  "compound/layouts/TopBottomCompound": () => import("../compound/layouts/TopBottomCompound.tsx?raw"),
+  "compound/sku-compound/EcommerceSKUCompound": () => import("../compound/sku-compound/EcommerceSKUCompound.tsx?raw"),
+  "compound/ui-display/TitleDescriptionDemo": () =>
+    import("../compound/ui-display/TitleDescriptionDemo.tsx?raw"),
+  "compound/ui-display/PriceLabelsDemo": () =>
+    import("../compound/ui-display/PriceLabelsDemo.tsx?raw"),
+  "compound/ui-display/MediaAndDescDemo": () =>
+    import("../compound/ui-display/MediaAndDescDemo.tsx?raw"),
+  "compound/ui-display/SavingsBadgeDemo": () =>
+    import("../compound/ui-display/SavingsBadgeDemo.tsx?raw"),
+  "compound/ui-display/StockBadgeDemo": () =>
+    import("../compound/ui-display/StockBadgeDemo.tsx?raw"),
+  "compound/ui-display/CouponBarDemo": () =>
+    import("../compound/ui-display/CouponBarDemo.tsx?raw"),
+  "compound/controls/VariantSelectorDemo": () =>
+    import("../compound/controls/VariantSelectorDemo.tsx?raw"),
+  "compound/controls/ColorSwatchesDemo": () =>
+    import("../compound/controls/ColorSwatchesDemo.tsx?raw"),
+  "compound/controls/SizeSelectorDemo": () =>
+    import("../compound/controls/SizeSelectorDemo.tsx?raw"),
+  "compound/controls/OptionPickerDemo": () =>
+    import("../compound/controls/OptionPickerDemo.tsx?raw"),
+  "compound/controls/VariantSelectorMediaComboDemo": () =>
+    import("../compound/controls/VariantSelectorMediaComboDemo.tsx?raw"),
+  "compound/controls/VariantSelectorPriceInventoryDemo": () =>
+    import("../compound/controls/VariantSelectorPriceInventoryDemo.tsx?raw"),
+  "compound/controls/VariantSelectorActionsDemo": () =>
+    import("../compound/controls/VariantSelectorActionsDemo.tsx?raw"),
+  "compound/controls/VariantMediaSwitcherDemo": () =>
+    import("../compound/controls/VariantMediaSwitcherDemo.tsx?raw"),
+  "compound/state/StateDisplayDemo": () =>
+    import("../compound/state/StateDisplayDemo.tsx?raw"),
+  "compound/controls/QuantityStepperDemo": () =>
+    import("../compound/controls/QuantityStepperDemo.tsx?raw"),
+  "compound/a11y/ActionsDemo": () =>
+    import("../compound/a11y/ActionsDemo.tsx?raw"),
+  "compound/a11y/A11yToolbarDemo": () =>
+    import("../compound/a11y/A11yToolbarDemo.tsx?raw"),
+  "compound/logistics/ShippingEstimatorDemo": () =>
+    import("../compound/logistics/ShippingEstimatorDemo.tsx?raw"),
+  "compound/logistics/DeliveryTimelineDemo": () =>
+    import("../compound/logistics/DeliveryTimelineDemo.tsx?raw"),
+  "compound/logistics/ReturnPolicyDemo": () =>
+    import("../compound/logistics/ReturnPolicyDemo.tsx?raw"),
+  "compound/commerce-combo/UpsellBundleDemo": () =>
+    import("../compound/commerce-combo/UpsellBundleDemo.tsx?raw"),
+  "compound/commerce-combo/OrderSummaryDemo": () =>
+    import("../compound/commerce-combo/OrderSummaryDemo.tsx?raw"),
   "slots/ResponsiveSlots": () => import("../slots/ResponsiveSlots.tsx?raw"),
   "slots/GalleryVideoSlots": () => import("../slots/GalleryVideoSlots.tsx?raw"),
 };
@@ -80,14 +153,15 @@ const DemoPage: React.FC<DemoPageProps> = ({
   title,
   description,
   children,
+  sourceKey,
 }) => {
   const location = useLocation();
   const [sourceCode, setSourceCode] = useState<string>("");
 
   useEffect(() => {
     const loadSourceCode = async () => {
-      // 获取当前路由对应的文件名
-      const fileName = routeToFileMap[location.pathname];
+      // 获取当前路由对应的文件名；若提供了 sourceKey，则优先使用
+      const fileName = sourceKey ?? routeToFileMap[location.pathname];
       if (fileName) {
         try {
           // 使用显式映射，避免变量路径的动态导入在构建阶段无法被静态分析
@@ -106,7 +180,7 @@ const DemoPage: React.FC<DemoPageProps> = ({
     };
 
     loadSourceCode();
-  }, [location.pathname]);
+  }, [location.pathname, sourceKey]);
 
   return (
     <div className="page">

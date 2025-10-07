@@ -1,54 +1,3 @@
-
-
-
-
-
-
-
-toolName: view_folder
-
-status: success
-
-e:\vane-card\src\components\CardPlugin\compound
-
-
-
-
-toolName: search_codebase
-
-status: success
-
-query: List available custom plugins and their primary responsibilities to identify modification points and new plugin opportunities.
-
-
-
-
-toolName: search_codebase
-
-status: success
-
-query: List current compound component files to assess sub-component structure and identify expansion points.
-
-
-
-
-toolName: search_codebase
-
-status: success
-
-query: Scan architecture doc to align enhancement plan terminology and ensure consistency with documented plugin states and future work.
-
-
-
-
-toolName: todo_write
-
-status: success
-
-Todos updated: 4 items
-
-以下是针对 `e:\vane-card\src` 的增强方案，围绕复合组件子组件扩展、现有插件的修改点与新增插件清单，已排除图片处理（后续将集成 `vane-lazy-image`）。
-
 **总体思路**
 - 强化复合组件 `compound/*` 的“结构表达”，让更多信息与交互以子组件呈现。
 - 现有行为插件沿用 `PluginBus` 联动，统一键名与事件输出，提升一致性与可维护性。
@@ -166,14 +115,14 @@ Todos updated: 4 items
 ### 与本文档计划项的对应标注
 
 - 可新增子组件（状态）：
-  - `OrderSummaryPanel` — [计划中]
-  - `SavingsBadge` — [计划中]
-  - `StockBadge` — [计划中]
+  - `OrderSummaryPanel` — [已完成]
+  - `SavingsBadge` — [已完成]
+  - `StockBadge` — [已完成]
   - `VariantMediaSwitcher` — [已完成]
   - `ShippingEstimator` — [已完成]
   - `DeliveryTimeline` — [已完成]
   - `ReturnPolicy` — [已完成]
-  - `CouponBar` — [计划中]
+  - `CouponBar` — [已完成]
   - `UpsellBundle` — [已完成]
   - `A11yToolbar` — [已完成]
   - `URLSyncIndicator` — [计划中]
@@ -188,3 +137,5 @@ Todos updated: 4 items
 - 为 `A11yToolbar` 偏好添加本地存储持久化与初始化恢复。
 - 在 `EcommerceSKUCompound` 中补充 `OrderSummaryPanel/StockBadge/CouponBar` 的集成，统一与插件总线键对齐。
 - 增加单元测试与 Storybook 文档，覆盖关键交互与演示用例。
+
+

@@ -6,12 +6,12 @@ import {
   createInventoryPlugin,
   createOrderSummaryPlugin,
   createPriceCalculatorPlugin,
+  createQuantityPlugin,
   createSKUPlugin,
   createUserTagPlugin,
-  createQuantityPlugin,
-} from "../../../components/CardPlugin";
+} from "../../../../components/CardPlugin";
 
-import DemoPage from "../_layout/DemoPage";
+import DemoPage from "../../_layout/DemoPage";
 import React from "react";
 
 const productData = {
@@ -148,7 +148,7 @@ const EcommerceSKUCompound: React.FC = () => {
                 showBreakdown
                 onEstimateChange={(r) => setEtaDays(r.etaDays)}
               />
-              <ProductCard.DeliveryTimeline etaDays={etaDays ?? 5} skipWeekends showDateRange />
+              <ProductCard.DeliveryTimeline etaDays={etaDays ?? 5} weekendSkip showDates />
             </div>
 
             {/* 退换政策 */}
@@ -159,7 +159,7 @@ const EcommerceSKUCompound: React.FC = () => {
               allowExchange
               freeReturnWithinDays={7}
               restockingFeePercent={0}
-              contactInfo="客服热线：400-123-4567"
+              contact="客服热线：400-123-4567"
               policyLink="#"
             />
 

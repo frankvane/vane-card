@@ -72,10 +72,19 @@ export const OrderSummaryPanel: React.FC<OrderSummaryPanelProps> = ({
     freeShippingThreshold,
   ]);
 
-  // 使用 useEffect 来处理回调，避免无限循环
+  // 使用 useEffect 触发回调；改为依赖原子字段，避免对象引用变化造成的循环
   React.useEffect(() => {
     onOrderChange?.(summary);
-  }, [summary, onOrderChange]);
+    // 仅在关键数值变化时触发，以避免“Maximum update depth exceeded”
+  }, [
+    summary.subtotal,
+    summary.tax,
+    summary.shipping,
+    summary.total,
+    summary.quantity,
+    summary.unitPrice,
+    onOrderChange,
+  ]);
 
   const formatPrice = (price: number) => `${currency}${price.toFixed(2)}`;
 

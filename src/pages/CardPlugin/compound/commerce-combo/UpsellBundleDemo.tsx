@@ -1,6 +1,6 @@
+import DemoPage from "../../_layout/DemoPage";
+import { ProductCard } from "../../../../components/CardPlugin";
 import React from "react";
-import { ProductCard } from "../../../components/CardPlugin/compound";
-
 const demoProduct = {
   id: "P-5001",
   title: "蓝牙降噪耳机",
@@ -37,25 +37,26 @@ export default function UpsellBundleDemo() {
   const [message, setMessage] = React.useState<string>("");
 
   return (
-    <div style={{ padding: 24 }}>
-      <h2 style={{ marginBottom: 16 }}>UpsellBundle 搭配购示例</h2>
-      <p style={{ color: "#666", marginBottom: 24 }}>
-        展示常见搭配组合与折扣价，支持点击加入搭配购的交互回调。
-      </p>
+    <DemoPage
+      title="UpsellBundle 搭配购示例"
+      description="展示常见搭配组合与折扣价，支持点击加入搭配购的交互回调。"
+      sourceKey="compound/commerce-combo/UpsellBundleDemo"
+    >
+      <div style={{ padding: 24 }}>
+        <ProductCard productId={demoProduct.id} data={demoProduct}>
+          <ProductCard.Section title="推荐搭配">
+            <ProductCard.UpsellBundle
+              bundles={bundles}
+              layout="horizontal"
+              onAddBundle={(b) => setMessage(`已选择搭配购：${b.title}`)}
+            />
+          </ProductCard.Section>
+        </ProductCard>
 
-      <ProductCard data={demoProduct}>
-        <ProductCard.Section title="推荐搭配">
-          <ProductCard.UpsellBundle
-            bundles={bundles}
-            layout="horizontal"
-            onAddBundle={(b) => setMessage(`已选择搭配购：${b.title}`)}
-          />
-        </ProductCard.Section>
-      </ProductCard>
-
-      {message && (
-        <div style={{ marginTop: 16, color: "#333" }}>{message}</div>
-      )}
-    </div>
+        {message && (
+          <div style={{ marginTop: 16, color: "#333" }}>{message}</div>
+        )}
+      </div>
+    </DemoPage>
   );
 }

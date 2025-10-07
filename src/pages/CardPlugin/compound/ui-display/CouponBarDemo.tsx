@@ -1,9 +1,9 @@
 import React from "react";
-import DemoPage from "../_layout/DemoPage";
+import DemoPage from "../../_layout/DemoPage";
 import {
   ProductCard,
   createQuantityPlugin,
-} from "../../../components/CardPlugin";
+} from "../../../../components/CardPlugin";
 
 const productData = {
   id: "coupon-bar-demo",

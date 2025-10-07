@@ -2,40 +2,53 @@ import "./App.css";
 
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
+import A11yToolbarDemo from "./pages/CardPlugin/compound/a11y/A11yToolbarDemo";
+import ActionsDemo from "./pages/CardPlugin/compound/a11y/ActionsDemo";
 import AdvAllInOne from "./pages/CardPlugin/advanced/AllInOne";
 import AdvAnimationAnalytics from "./pages/CardPlugin/advanced/AnimationAnalytics";
 import AdvCountdownPromo from "./pages/CardPlugin/advanced/CountdownPromo";
 import AdvCustomActions from "./pages/CardPlugin/advanced/CustomActions";
 import BackgroundImageLayout from "./pages/CardPlugin/layouts/BackgroundImageLayout";
 import BannerLayout from "./pages/CardPlugin/layouts/BannerLayout";
-import BasicCompound from "./pages/CardPlugin/compound/BasicCompound";
+import BasicCompound from "./pages/CardPlugin/compound/layouts/BasicCompound";
 import BasicSlots from "./pages/CardPlugin/slots/BasicSlots";
 import BottomImageLayout from "./pages/CardPlugin/layouts/BottomImageLayout";
 import CardHome from "./pages/CardPlugin/Home";
-import EcommerceSKUCompound from "./pages/CardPlugin/compound/EcommerceSKUCompound";
+import ColorSwatchesDemo from "./pages/CardPlugin/compound/controls/ColorSwatchesDemo";
+import CouponBarDemo from "./pages/CardPlugin/compound/ui-display/CouponBarDemo";
+import DeliveryTimelineDemo from "./pages/CardPlugin/compound/logistics/DeliveryTimelineDemo";
+import EcommerceSKUCompound from "./pages/CardPlugin/compound/sku-compound/EcommerceSKUCompound";
 import FooterActionsSlots from "./pages/CardPlugin/slots/FooterActionsSlots";
 import GalleryVideoSlots from "./pages/CardPlugin/slots/GalleryVideoSlots";
 import GridLayout from "./pages/CardPlugin/layouts/GridLayout";
 import HeaderOverlaySlots from "./pages/CardPlugin/slots/HeaderOverlaySlots";
 import HorizontalLayout from "./pages/CardPlugin/layouts/HorizontalLayout";
-import LeftRightCompound from "./pages/CardPlugin/compound/LeftRightCompound";
+import LeftRightCompound from "./pages/CardPlugin/compound/layouts/LeftRightCompound";
+import MediaAndDescDemo from "./pages/CardPlugin/compound/ui-display/MediaAndDescDemo";
 import MinimalLayout from "./pages/CardPlugin/layouts/MinimalLayout";
-import OrderSummaryDemo from "./pages/CardPlugin/compound/OrderSummaryDemo";
-import SavingsBadgeDemo from "./pages/CardPlugin/compound/SavingsBadgeDemo";
-import StockBadgeDemo from "./pages/CardPlugin/compound/StockBadgeDemo";
-import CouponBarDemo from "./pages/CardPlugin/compound/CouponBarDemo";
-import VariantMediaSwitcherDemo from "./pages/CardPlugin/compound/VariantMediaSwitcherDemo";
-import ShippingEstimatorDemo from "./pages/CardPlugin/compound/ShippingEstimatorDemo";
-import DeliveryTimelineDemo from "./pages/CardPlugin/compound/DeliveryTimelineDemo";
-import ReturnPolicyDemo from "./pages/CardPlugin/compound/ReturnPolicyDemo";
-import UpsellBundleDemo from "./pages/CardPlugin/compound/UpsellBundleDemo";
-import A11yToolbarDemo from "./pages/CardPlugin/compound/A11yToolbarDemo";
-import PluginEnhancedCompound from "./pages/CardPlugin/compound/PluginEnhancedCompound";
+import OptionPickerDemo from "./pages/CardPlugin/compound/controls/OptionPickerDemo";
+import OrderSummaryDemo from "./pages/CardPlugin/compound/commerce-combo/OrderSummaryDemo";
+import PluginEnhancedCompound from "./pages/CardPlugin/compound/layouts/PluginEnhancedCompound";
+import PriceLabelsDemo from "./pages/CardPlugin/compound/ui-display/PriceLabelsDemo";
+import QuantityStepperDemo from "./pages/CardPlugin/compound/controls/QuantityStepperDemo";
 import React from "react";
 import ResponsiveSlots from "./pages/CardPlugin/slots/ResponsiveSlots";
+import ReturnPolicyDemo from "./pages/CardPlugin/compound/logistics/ReturnPolicyDemo";
 import RightImageLayout from "./pages/CardPlugin/layouts/RightImageLayout";
-import TopBottomCompound from "./pages/CardPlugin/compound/TopBottomCompound";
+import SavingsBadgeDemo from "./pages/CardPlugin/compound/ui-display/SavingsBadgeDemo";
+import ShippingEstimatorDemo from "./pages/CardPlugin/compound/logistics/ShippingEstimatorDemo";
+import SizeSelectorDemo from "./pages/CardPlugin/compound/controls/SizeSelectorDemo";
+import StateDisplayDemo from "./pages/CardPlugin/compound/state/StateDisplayDemo";
+import StockBadgeDemo from "./pages/CardPlugin/compound/ui-display/StockBadgeDemo";
+import TitleDescriptionDemo from "./pages/CardPlugin/compound/ui-display/TitleDescriptionDemo";
+import TopBottomCompound from "./pages/CardPlugin/compound/layouts/TopBottomCompound";
 import TwoColumnLayout from "./pages/CardPlugin/layouts/TwoColumnLayout";
+import UpsellBundleDemo from "./pages/CardPlugin/compound/commerce-combo/UpsellBundleDemo";
+import VariantMediaSwitcherDemo from "./pages/CardPlugin/compound/controls/VariantMediaSwitcherDemo";
+import VariantSelectorDemo from "./pages/CardPlugin/compound/controls/VariantSelectorDemo";
+import VariantSelectorMediaComboDemo from "./pages/CardPlugin/compound/controls/VariantSelectorMediaComboDemo";
+import VariantSelectorPriceInventoryDemo from "./pages/CardPlugin/compound/controls/VariantSelectorPriceInventoryDemo";
+import VariantSelectorActionsDemo from "./pages/CardPlugin/compound/controls/VariantSelectorActionsDemo";
 import VerticalLayout from "./pages/CardPlugin/layouts/VerticalLayout";
 
 const App: React.FC = () => {
@@ -84,17 +97,30 @@ const App: React.FC = () => {
             <NavLink to="/compound/left-right">左右布局</NavLink>
             <NavLink to="/compound/top-bottom">上下布局</NavLink>
             <NavLink to="/compound/enhanced">增强：复合组件+插件</NavLink>
-            <NavLink to="/compound/ecommerce-sku">电商增强 + SKU</NavLink>
-            <NavLink to="/compound/order-summary">订单明细面板</NavLink>
-            <NavLink to="/compound/savings-badge">节省金额徽章</NavLink>
-            <NavLink to="/compound/stock-badge">库存提示徽章</NavLink>
-            <NavLink to="/compound/coupon-bar">优惠信息条</NavLink>
-            <NavLink to="/compound/variant-media-switcher">规格切换主图</NavLink>
-            <NavLink to="/compound/shipping-estimator">配送费估算</NavLink>
-            <NavLink to="/compound/delivery-timeline">配送时间线</NavLink>
-            <NavLink to="/compound/return-policy">退换政策</NavLink>
-            <NavLink to="/compound/upsell-bundle">搭配购</NavLink>
-            <NavLink to="/compound/a11y-toolbar">可访问性工具栏</NavLink>
+            <NavLink to="/compound/sku-compound/ecommerce-sku">电商增强 + SKU</NavLink>
+            <NavLink to="/compound/ui-display/title-description">UI：标题+描述</NavLink>
+            <NavLink to="/compound/ui-display/media-desc">UI：媒体与描述</NavLink>
+            <NavLink to="/compound/ui-display/price-labels">UI：价格标示</NavLink>
+            <NavLink to="/compound/ui-display/savings-badge">UI：节省金额徽章</NavLink>
+            <NavLink to="/compound/ui-display/stock-badge">UI：库存提示徽章</NavLink>
+            <NavLink to="/compound/ui-display/coupon-bar">UI：优惠信息条</NavLink>
+            <NavLink to="/compound/state/state-display">状态：派生展示</NavLink>
+            <NavLink to="/compound/controls/variant-selector">控件：规格选择</NavLink>
+            <NavLink to="/compound/controls/variant-selector-media">控件：规格+主图联动</NavLink>
+            <NavLink to="/compound/controls/variant-selector-price-inventory">控件：规格+价格/库存联动</NavLink>
+            <NavLink to="/compound/controls/variant-selector-actions">控件：规格+操作联动</NavLink>
+            <NavLink to="/compound/controls/variant-media-switcher">控件：规格切换主图</NavLink>
+            <NavLink to="/compound/controls/color-swatches">控件：颜色选择</NavLink>
+            <NavLink to="/compound/controls/size-selector">控件：尺码选择</NavLink>
+            <NavLink to="/compound/controls/option-picker">控件：通用属性</NavLink>
+            <NavLink to="/compound/controls/quantity-stepper">控件：数量步进</NavLink>
+            <NavLink to="/compound/commerce-combo/order-summary">组合：订单明细面板</NavLink>
+            <NavLink to="/compound/commerce-combo/upsell-bundle">组合：搭配购</NavLink>
+            <NavLink to="/compound/logistics/shipping-estimator">物流：配送费估算</NavLink>
+            <NavLink to="/compound/logistics/delivery-timeline">物流：配送时间线</NavLink>
+            <NavLink to="/compound/logistics/return-policy">物流：退换政策</NavLink>
+            <NavLink to="/compound/a11y/toolbar">可访问性工具栏</NavLink>
+            <NavLink to="/compound/a11y/actions">可访问性：操作区</NavLink>
           </div>
         </nav>
       </aside>
@@ -155,17 +181,36 @@ const App: React.FC = () => {
           />
           <Route path="/compound/left-right" element={<LeftRightCompound />} />
           <Route path="/compound/top-bottom" element={<TopBottomCompound />} />
-          <Route path="/compound/ecommerce-sku" element={<EcommerceSKUCompound />} />
-          <Route path="/compound/order-summary" element={<OrderSummaryDemo />} />
-            <Route path="/compound/savings-badge" element={<SavingsBadgeDemo />} />
-            <Route path="/compound/stock-badge" element={<StockBadgeDemo />} />
-            <Route path="/compound/coupon-bar" element={<CouponBarDemo />} />
-            <Route path="/compound/variant-media-switcher" element={<VariantMediaSwitcherDemo />} />
-            <Route path="/compound/shipping-estimator" element={<ShippingEstimatorDemo />} />
-            <Route path="/compound/delivery-timeline" element={<DeliveryTimelineDemo />} />
-            <Route path="/compound/return-policy" element={<ReturnPolicyDemo />} />
-            <Route path="/compound/upsell-bundle" element={<UpsellBundleDemo />} />
-            <Route path="/compound/a11y-toolbar" element={<A11yToolbarDemo />} />
+          <Route path="/compound/sku-compound/ecommerce-sku" element={<EcommerceSKUCompound />} />
+          <Route
+            path="/compound/ui-display/title-description"
+            element={<TitleDescriptionDemo />}
+          />
+          <Route path="/compound/ui-display/media-desc" element={<MediaAndDescDemo />} />
+          <Route path="/compound/ui-display/price-labels" element={<PriceLabelsDemo />} />
+          <Route path="/compound/ui-display/savings-badge" element={<SavingsBadgeDemo />} />
+          <Route path="/compound/ui-display/stock-badge" element={<StockBadgeDemo />} />
+          <Route path="/compound/ui-display/coupon-bar" element={<CouponBarDemo />} />
+          <Route path="/compound/state/state-display" element={<StateDisplayDemo />} />
+          <Route
+            path="/compound/controls/variant-selector"
+            element={<VariantSelectorDemo />}
+          />
+          <Route path="/compound/controls/variant-selector-media" element={<VariantSelectorMediaComboDemo />} />
+          <Route path="/compound/controls/variant-selector-price-inventory" element={<VariantSelectorPriceInventoryDemo />} />
+          <Route path="/compound/controls/variant-selector-actions" element={<VariantSelectorActionsDemo />} />
+          <Route path="/compound/controls/variant-media-switcher" element={<VariantMediaSwitcherDemo />} />
+          <Route path="/compound/controls/color-swatches" element={<ColorSwatchesDemo />} />
+          <Route path="/compound/controls/size-selector" element={<SizeSelectorDemo />} />
+          <Route path="/compound/controls/option-picker" element={<OptionPickerDemo />} />
+          <Route path="/compound/controls/quantity-stepper" element={<QuantityStepperDemo />} />
+          <Route path="/compound/commerce-combo/order-summary" element={<OrderSummaryDemo />} />
+          <Route path="/compound/commerce-combo/upsell-bundle" element={<UpsellBundleDemo />} />
+          <Route path="/compound/logistics/shipping-estimator" element={<ShippingEstimatorDemo />} />
+          <Route path="/compound/logistics/delivery-timeline" element={<DeliveryTimelineDemo />} />
+          <Route path="/compound/logistics/return-policy" element={<ReturnPolicyDemo />} />
+            <Route path="/compound/a11y/toolbar" element={<A11yToolbarDemo />} />
+            <Route path="/compound/a11y/actions" element={<ActionsDemo />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
