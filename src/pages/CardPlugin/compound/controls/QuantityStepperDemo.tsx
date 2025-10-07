@@ -8,7 +8,7 @@ const product = {
   description: "轻量耐用，多仓位设计，通勤与户外均适用",
   price: 299,
   image:
-    "https://images.unsplash.com/photo-1519681393784-16cb13732f6d?q=80&w=800&auto=format&fit=crop",
+    "https://picsum.photos/seed/quantity-stepper/800/600",
   variants: [
     { attributes: { 颜色: "黑" }, price: 299, stock: 5 },
     { attributes: { 颜色: "蓝" }, price: 299, stock: 2 },

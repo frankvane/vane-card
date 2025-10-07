@@ -5,7 +5,7 @@ const demoProduct = {
   id: "P-5001",
   title: "蓝牙降噪耳机",
   image:
-    "https://images.unsplash.com/photo-1518441902113-c1d3c9629470?q=80&w=1200&auto=format&fit=crop",
+    "https://picsum.photos/seed/upsell-main/1200/800",
   price: 59900,
   oldPrice: 79900,
   inventory: 35,
@@ -17,8 +17,8 @@ const bundles = [
     title: "耳机 + 保护套 + 清洁套装",
     items: [
       { id: "I-HEADPHONE", title: "降噪耳机（本品）", price: 59900, image: demoProduct.image },
-      { id: "I-CASE", title: "收纳保护套", price: 6900, image: "https://images.unsplash.com/photo-1526273600906-2aa9330989b2?q=80&w=800&auto=format&fit=crop" },
-      { id: "I-CLEAN", title: "清洁套装", price: 3900, image: "https://images.unsplash.com/photo-1567401463434-3e3a01d80f04?q=80&w=800&auto=format&fit=crop" },
+      { id: "I-CASE", title: "收纳保护套", price: 6900, image: "https://picsum.photos/seed/bundle-case/800/600" },
+      { id: "I-CLEAN", title: "清洁套装", price: 3900, image: "https://picsum.photos/seed/bundle-clean/800/600" },
     ],
     bundlePrice: 66900,
   },
@@ -27,7 +27,7 @@ const bundles = [
     title: "耳机 + 替换耳罩",
     items: [
       { id: "I-HEADPHONE", title: "降噪耳机（本品）", price: 59900, image: demoProduct.image },
-      { id: "I-EARPADS", title: "替换耳罩（一副）", price: 5900, image: "https://images.unsplash.com/photo-1565959376272-9a3cb138d0f6?q=80&w=800&auto=format&fit=crop" },
+      { id: "I-EARPADS", title: "替换耳罩（一副）", price: 5900, image: "https://picsum.photos/seed/bundle-earpads/800/600" },
     ],
     savingsPercent: 10,
   },

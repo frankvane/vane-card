@@ -17,9 +17,9 @@ const product = {
   ],
   // 变体用于联动价格与库存
   variants: [
-    { attributes: { 颜色: "黑" }, price: 299, stock: 12, image: "https://images.unsplash.com/photo-1520974723455-1a04357b8cca?q=80&w=800&auto=format&fit=crop" },
-    { attributes: { 颜色: "蓝" }, price: 309, stock: 6, image: "https://images.unsplash.com/photo-1520974723455-1a04357b8cca?q=80&w=800&auto=format&fit=crop" },
-    { attributes: { 颜色: "灰" }, price: 289, stock: 0, image: "https://images.unsplash.com/photo-1520974723455-1a04357b8cca?q=80&w=800&auto=format&fit=crop" },
+    { attributes: { 颜色: "黑" }, price: 299, stock: 12, image: "https://picsum.photos/seed/color-black/800/600" },
+    { attributes: { 颜色: "蓝" }, price: 309, stock: 6, image: "https://picsum.photos/seed/color-blue/800/600" },
+    { attributes: { 颜色: "灰" }, price: 289, stock: 0, image: "https://picsum.photos/seed/color-gray/800/600" },
   ],
   badges: ["限时特惠", "热卖"],
 };

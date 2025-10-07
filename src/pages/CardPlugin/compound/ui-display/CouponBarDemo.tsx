@@ -12,7 +12,7 @@ const productData = {
   price: 299,
   oldPrice: 399,
   image:
-    "https://images.unsplash.com/photo-1545454675-3531c012ea89?q=80&w=800&auto=format&fit=crop",
+    "https://picsum.photos/seed/coupon-bar/800/600",
   inventory: 20,
   sku: "SPEAKER-001",
 };

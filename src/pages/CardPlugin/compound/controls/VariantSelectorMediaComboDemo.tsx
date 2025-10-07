@@ -29,19 +29,19 @@ const colorImages = [
     id: "SKU-RED",
     label: "红色",
     url:
-      "https://images.unsplash.com/photo-1547586696-31e01c84e446?q=80&w=800&auto=format&fit=crop",
+      "https://picsum.photos/seed/SKU-RED/800/600",
   },
   {
     id: "SKU-BLUE",
     label: "蓝色",
     url:
-      "https://images.unsplash.com/photo-1528701800489-20be3c2ea237?q=80&w=800&auto=format&fit=crop",
+      "https://picsum.photos/seed/SKU-BLUE/800/600",
   },
   {
     id: "SKU-BLACK",
     label: "黑色",
     url:
-      "https://images.unsplash.com/photo-1519741497674-6117f5e584b9?q=80&w=800&auto=format&fit=crop",
+      "https://picsum.photos/seed/SKU-BLACK/800/600",
   },
 ];
 

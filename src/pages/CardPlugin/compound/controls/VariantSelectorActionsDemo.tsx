@@ -9,7 +9,7 @@ const product = {
     "贴合背负系统，肩带透气网布，适合越野跑与城市通勤的轻量背包。",
   price: 359,
   image:
-    "https://images.unsplash.com/photo-1518546305927-5a555bb702f8?q=80&w=800&auto=format&fit=crop",
+    "https://picsum.photos/seed/variant-actions/800/600",
   variants: [
     { attributes: { 颜色: "黑", 容量: "12L" }, price: 359, stock: 9 },
     { attributes: { 颜色: "蓝", 容量: "12L" }, price: 369, stock: 0 },

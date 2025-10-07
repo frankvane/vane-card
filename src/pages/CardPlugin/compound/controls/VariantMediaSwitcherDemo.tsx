@@ -18,19 +18,19 @@ const colorImages = [
     id: "SKU-RED",
     label: "红色",
     url:
-      "https://images.unsplash.com/photo-1547586696-31e01c84e446?q=80&w=800&auto=format&fit=crop",
+      "https://picsum.photos/seed/SKU-RED/800/600",
   },
   {
     id: "SKU-BLUE",
     label: "蓝色",
     url:
-      "https://images.unsplash.com/photo-1528701800489-20be3c2ea237?q=80&w=800&auto=format&fit=crop",
+      "https://picsum.photos/seed/SKU-BLUE/800/600",
   },
   {
     id: "SKU-BLACK",
     label: "黑色",
     url:
-      "https://images.unsplash.com/photo-1519741497674-6117f5e584b9?q=80&w=800&auto=format&fit=crop",
+      "https://picsum.photos/seed/SKU-BLACK/800/600",
   },
 ];
 
@@ -73,13 +73,13 @@ export default function VariantMediaSwitcherDemo() {
 
           {/* 示例 2：纵向布局，禁止手动切换，仅跟随规格 */}
           <ProductCard productId={demoProduct.id} data={demoProduct} plugins={[createSKUPlugin({ attributes, variants })]}>
-            <ProductCard.Section title="纵向布局（仅跟随规格）">
+            <ProductCard.Section title="纵向布局（支持手动切换）">
               <ProductCard.VariantMediaSwitcher
                 layout="vertical"
                 thumbnailSize="small"
                 aspectRatio="1 / 1"
                 variantImages={colorImages}
-                enableManualSwitch={false}
+                enableManualSwitch
               />
               <div style={{ marginTop: 12 }}>
                 <ProductCard.VariantSelector attributes={{ 颜色: ["红色", "蓝色", "黑色"] }} />

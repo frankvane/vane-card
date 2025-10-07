@@ -9,7 +9,7 @@ const product = {
     "三层复合面料，防风防水，透气轻盈，适合城市通勤与户外徒步。",
   price: 699,
   image:
-    "https://images.unsplash.com/photo-1511556134131-48f6920a0f33?q=80&w=800&auto=format&fit=crop",
+    "https://picsum.photos/seed/variant-price/800/600",
   // 变体包含不同价格与库存，演示与 Price/Inventory 联动
   variants: [
     { attributes: { 颜色: "黑", 尺码: "M" }, price: 699, stock: 12 },

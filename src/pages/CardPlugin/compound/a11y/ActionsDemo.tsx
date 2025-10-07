@@ -8,7 +8,7 @@ const product = {
   description: "降噪与通话优化，佩戴舒适，续航稳定",
   price: 499,
   image:
-    "https://images.unsplash.com/photo-1518444029140-d4e9d1e3e0b7?q=80&w=1000&auto=format&fit=crop",
+    "https://picsum.photos/seed/a11y-actions/1000/667",
   inventory: 26,
 };
 
