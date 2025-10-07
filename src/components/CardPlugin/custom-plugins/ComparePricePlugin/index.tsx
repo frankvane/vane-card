@@ -89,6 +89,23 @@ export const createComparePricePlugin: PluginCreator<any, ComparePricePluginConf
           </div>
         );
       },
+      renderPriceArea: (context) => {
+        if (!competitors.length) return null;
+        const currentPrice = Number(
+          (context.bus?.getData?.(BusKeys.skuPrice) as any) ?? (context.data as any)?.price ?? 0
+        );
+        const lowest = competitors.reduce((min, c) => (c.price < min ? c.price : min), Infinity);
+        if (!isFinite(lowest)) return null;
+        const diff = currentPrice - lowest;
+        const isLower = diff < 0;
+        const color = isLower ? "#388e3c" : "#d0021b";
+        const label = isLower ? `低于最低价 ¥${Math.round(Math.abs(diff))}` : `最低价 ¥${lowest}`;
+        return (
+          <span style={{ fontSize: 12, color, fontWeight: 600 }} title="平台比价">
+            {label}
+          </span>
+        );
+      },
     },
     config,
   };

@@ -1,5 +1,6 @@
 import React from "react";
 import { useProductCard } from "../ProductCard";
+import { usePluginSlot } from "../../plugins/SlotsContext";
 
 export type PriceProps = {
   value?: number | string;
@@ -24,6 +25,18 @@ export const Price: React.FC<PriceProps> = ({ value, currency = "¥", style, cla
 
   const active = getActiveVariant();
   const v = value ?? (active?.price ?? data?.price);
+  const priceAreaNodes = usePluginSlot("priceArea");
   if (v == null) return null;
-  return <div style={style} className={className}>{currency}{v}</div>;
+  return (
+    <div style={style} className={className}>
+      {currency}{v}
+      {priceAreaNodes.length > 0 && (
+        <div className="vc-price__area" data-slot="price-area" style={{ display: "inline-flex", gap: 8, marginLeft: 8 }}>
+          {priceAreaNodes.map((node, i) => (
+            <React.Fragment key={i}>{node}</React.Fragment>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };

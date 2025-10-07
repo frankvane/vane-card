@@ -266,6 +266,12 @@ export interface CardPluginHooks<T = any> {
    */
   renderActions?: (context: CardPluginContext<T>) => React.ReactNode;
 
+  /**
+   * 自定义价格区域渲染（比价/省钱徽章/单位价/可领券提示等）
+   * 可选钩子，默认不渲染
+   */
+  renderPriceArea?: (context: CardPluginContext<T>) => React.ReactNode;
+
   // ========== Props 转换钩子 ==========
 
   /**

@@ -121,6 +121,21 @@ export const createPriceCalculatorPlugin: PluginCreator<any, PriceCalculatorPlug
           </div>
         );
       },
+      renderPriceArea: (context) => {
+        const skuPrice = context.bus?.getData?.(BusKeys.skuPrice);
+        const price = Number(
+          (skuPrice as any) ?? (context.data as any)?.price ?? 0
+        );
+        const originalPrice = Number((context.data as any)?.originalPrice || 0);
+        const hasOriginal = cfg.showOriginalPrice && originalPrice > price && originalPrice > 0;
+        const discount = hasOriginal ? Math.round((1 - price / originalPrice) * 100) : 0;
+        if (!hasOriginal || !cfg.showDiscount || discount <= 0) return null;
+        return (
+          <span style={{ fontSize: 12, color: "#388e3c", fontWeight: 700 }} title="折扣">
+            -{discount}%
+          </span>
+        );
+      },
     },
     config: cfg,
   };

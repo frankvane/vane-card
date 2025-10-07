@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useProductCard } from "../ProductCard";
+import { usePluginSlot } from "../../plugins/SlotsContext";
 
 export type CouponInfo = {
   id: string;
@@ -44,6 +45,7 @@ export const CouponBar: React.FC<CouponBarProps> = ({
 }) => {
   const { data, state } = useProductCard();
   const [expandedCoupon, setExpandedCoupon] = useState<string | null>(null);
+  const priceAreaNodes = usePluginSlot("priceArea");
 
   // 如果没有优惠券，不显示
   if (!coupons || coupons.length === 0) {
@@ -257,6 +259,13 @@ export const CouponBar: React.FC<CouponBarProps> = ({
           }}
         >
           +{availableCoupons.length - maxVisible}个
+        </div>
+      )}
+      {priceAreaNodes.length > 0 && (
+        <div className="vc-price__area" data-slot="price-area" style={{ display: "flex", gap: 8, marginTop: 8 }}>
+          {priceAreaNodes.map((node, i) => (
+            <React.Fragment key={i}>{node}</React.Fragment>
+          ))}
         </div>
       )}
     </div>

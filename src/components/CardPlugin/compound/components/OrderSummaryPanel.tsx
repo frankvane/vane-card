@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useProductCard } from "../ProductCard";
+import { usePluginSlot } from "../../plugins/SlotsContext";
 
 export type OrderSummaryPanelProps = {
   className?: string;
@@ -111,6 +112,8 @@ export const OrderSummaryPanel: React.FC<OrderSummaryPanelProps> = ({
     </div>
   );
 
+  const priceAreaNodes = usePluginSlot("priceArea");
+
   return (
     <div
       className={className}
@@ -168,6 +171,14 @@ export const OrderSummaryPanel: React.FC<OrderSummaryPanelProps> = ({
         <span>数量: {summary.quantity}</span>
         <span>单价: {formatPrice(summary.unitPrice)}</span>
       </div>
+
+      {priceAreaNodes.length > 0 && (
+        <div className="vc-price__area" data-slot="price-area" style={{ display: "grid", gap: 8, marginTop: 12 }}>
+          {priceAreaNodes.map((node, i) => (
+            <React.Fragment key={i}>{node}</React.Fragment>
+          ))}
+        </div>
+      )}
 
       {showShipping && summary.subtotal < freeShippingThreshold && (
         <div

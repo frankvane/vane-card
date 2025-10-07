@@ -23,6 +23,7 @@ import React, {
 
 import { createPluginBus } from "./PluginBus";
 import { createPluginManager } from "./PluginManager";
+import { PluginSlotsProvider } from "./SlotsContext";
 
 export interface WithPluginsConfig<T = any> {
   plugins: CardPlugin<T>[];
@@ -305,7 +306,11 @@ export function withPlugins<T = any>(
         getSize: () => coreRef.current?.getSize() || { width: 0, height: 0 },
       }));
 
-      return <WrappedComponent ref={coreRef} {...enhancedProps} />;
+      return (
+        <PluginSlotsProvider pluginContext={pluginContext} plugins={plugins}>
+          <WrappedComponent ref={coreRef} {...enhancedProps} />
+        </PluginSlotsProvider>
+      );
     }
   );
 
