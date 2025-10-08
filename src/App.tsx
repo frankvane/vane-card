@@ -50,6 +50,7 @@ import VariantSelectorDemo from "./pages/CardPlugin/compound/controls/VariantSel
 import VariantSelectorMediaComboDemo from "./pages/CardPlugin/compound/controls/VariantSelectorMediaComboDemo";
 import VariantSelectorPriceInventoryDemo from "./pages/CardPlugin/compound/controls/VariantSelectorPriceInventoryDemo";
 import VerticalLayout from "./pages/CardPlugin/layouts/VerticalLayout";
+import ReadmeDemo from "./pages/CardPlugin/ReadmeDemo";
 
 const App: React.FC = () => {
   return (
@@ -60,6 +61,7 @@ const App: React.FC = () => {
           <NavLink to="/" end>
             首页
           </NavLink>
+          <NavLink to="/readme">README 文档</NavLink>
 
  <h3 style={{ marginTop: 12 }}>复合组件专区</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -173,6 +175,7 @@ const App: React.FC = () => {
       <main className="main">
         <Routes>
           <Route path="/" element={<CardHome />} />
+          <Route path="/readme" element={<ReadmeDemo />} />
 
           {/* 插槽专区路由 */}
           <Route path="/slots/basic" element={<BasicSlots />} />
