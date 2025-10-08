@@ -407,101 +407,83 @@ export default defineConfig({
 
 ---
 
-## 📚 插件目录（扩展版）
+## 📚 插件目录
 
-> 以下为围绕产品卡的插件类别建议清单（示例），可作为未来扩展的方向参考。
+本节按照项目当前真实存在的内容进行梳理，改为“表格形式”列出清单，包含名称、说明与路径，便于查阅与对照代码。
 
-### 价格与优惠（20+）
+### 现有插件清单（src/components/CardPlugin/custom-plugins）
 
-| 插件名                       | 说明                                 |
-| ---------------------------- | ------------------------------------ |
-| `PriceCalculatorPlugin`      | 价格计算与展示                       |
-| `ComparePricePlugin`         | 对比价与折扣                         |
-| `CouponPlugin`               | 展示可用优惠券                       |
-| `CouponRecommendPlugin`      | 推荐更划算的优惠券                   |
-| `InstallmentPlugin`          | 分期与免息提示                       |
-| `FreeShippingBadgePlugin`    | 包邮角标                             |
-| `FlashSalePlugin`            | 秒杀价与倒计时                       |
-| `MemberPricePlugin`          | 会员价与权益显示                     |
-| `BulkDiscountPlugin`         | 多件折扣/满减提示                    |
-| `PriceGuaranteePlugin`       | 价保与补差说明                       |
-| `TaxAndFeePlugin`            | 税费与附加费提示                     |
-| `RegionalPricePlugin`        | 区域价/跨区提示                      |
-| `ShippingPricePlugin`        | 运费估算                             |
-| `ArrivalETAPlugin`           | 到站时效提示                         |
-| `VoucherStackingPlugin`      | 优惠叠加与顺序策略                   |
-| `PriceHistoryPlugin`         | 历史价格趋势                         |
-| `PriceLockPlugin`            | 价格锁定倒计时                       |
-| `ExchangeRatePlugin`         | 汇率转换显示                         |
-| `TaxInclusiveTogglePlugin`   | 含税/未含税切换                      |
-| `WholesalePricePlugin`       | 批量/渠道价展示                      |
+| 插件名称 | 简要说明 | 入口路径 |
+| --- | --- | --- |
+| A11yPlugin | 无障碍辅助与键盘导航，提升可访问性 | `src/components/CardPlugin/custom-plugins/A11yPlugin/index.ts` |
+| ActionsPlugin | 动作区按钮（购买、收藏、加购）统一行为 | `src/components/CardPlugin/custom-plugins/ActionsPlugin/index.tsx` |
+| AnalyticsPlugin | 埋点与曝光/点击事件上报，支持可插拔传输 | `src/components/CardPlugin/custom-plugins/AnalyticsPlugin/index.ts` |
+| AnimationPlugin | 卡片动效与过渡，增强交互体验 | `src/components/CardPlugin/custom-plugins/AnimationPlugin/index.ts` |
+| BadgePlugin | 角标/标签展示，用于促销标识等 | `src/components/CardPlugin/custom-plugins/BadgePlugin/index.tsx` |
+| ComparePricePlugin | 原价对比与折扣显示，展示优惠力度 | `src/components/CardPlugin/custom-plugins/ComparePricePlugin/index.tsx` |
+| CountdownPlugin | 倒计时促销组件，适用于限时活动 | `src/components/CardPlugin/custom-plugins/CountdownPlugin/index.tsx` |
+| CouponPlugin | 优惠券展示与领取逻辑 | `src/components/CardPlugin/custom-plugins/CouponPlugin/index.tsx` |
+| CouponRecommendPlugin | 自动推荐最佳优惠方案 | `src/components/CardPlugin/custom-plugins/CouponRecommendPlugin/index.tsx` |
+| GalleryPlugin | 图片画廊与缩略图联动 | `src/components/CardPlugin/custom-plugins/GalleryPlugin/index.tsx` |
+| HoverPlugin | 悬停反馈与交互态控制 | `src/components/CardPlugin/custom-plugins/HoverPlugin/index.tsx` |
+| ImagePlugin | 主图展示与懒加载 | `src/components/CardPlugin/custom-plugins/ImagePlugin/index.tsx` |
+| InventoryPlugin | 库存状态与阈值提醒 | `src/components/CardPlugin/custom-plugins/InventoryPlugin/index.tsx` |
+| OrderSummaryPlugin | 订单摘要/结算信息展示 | `src/components/CardPlugin/custom-plugins/OrderSummaryPlugin/index.tsx` |
+| PriceCalculatorPlugin | 价格计算与促销规则整合 | `src/components/CardPlugin/custom-plugins/PriceCalculatorPlugin/index.tsx` |
+| QuantityPlugin | 数量步进与校验 | `src/components/CardPlugin/custom-plugins/QuantityPlugin/index.tsx` |
+| ResponsivePlugin | 响应式布局适配 | `src/components/CardPlugin/custom-plugins/ResponsivePlugin/index.ts` |
+| ReviewPlugin | 评分与评论展示 | `src/components/CardPlugin/custom-plugins/ReviewPlugin/index.tsx` |
+| SKUPlugin | SKU 编码与规格组合展示 | `src/components/CardPlugin/custom-plugins/SKUPlugin/index.tsx` |
+| StatePlugin | 共享状态与事件总线桥接 | `src/components/CardPlugin/custom-plugins/StatePlugin/index.tsx` |
+| UserTagPlugin | 用户标签/画像展示 | `src/components/CardPlugin/custom-plugins/UserTagPlugin/index.tsx` |
+| VideoPlugin | 商品视频播放 | `src/components/CardPlugin/custom-plugins/VideoPlugin/index.tsx` |
 
-### 库存与物流（12+）
+> 注：以上清单来自 `src/components/CardPlugin/custom-plugins/*` 实际目录结构，均已在演示站可用。建议在生产环境中按需引入以控制体积。
 
-| 插件名                      | 说明                         |
-| --------------------------- | ---------------------------- |
-| `InventoryPlugin`           | 库存状态与售罄提示           |
-| `BackorderPlugin`           | 预售与延期发货提示           |
-| `WarehouseBadgePlugin`      | 仓库位置与配送路径角标       |
-| `LogisticsETAPlugin`        | 物流预计到达时间             |
-| `CourierPreferencePlugin`   | 配送方式偏好提示             |
-| `PickupAvailabilityPlugin`  | 自提点可用性                 |
-| `AddressValidationPlugin`   | 地址校验与风险提示           |
-| `ShippingRiskPlugin`        | 天气/节假日风险提示          |
-| `MultiWarehousePlugin`      | 多仓调度信息                 |
-| `GlobalShippingPlugin`      | 跨境物流与关务提示           |
-| `ReturnPolicyPlugin`        | 退换/售后政策展示            |
-| `StockAlertPlugin`          | 到货通知与提醒               |
+### 复合组件清单（src/components/CardPlugin/compound/components）
 
-### 视觉与交互（15+）
+| 组件名称 | 简要说明 | 组件路径 |
+| --- | --- | --- |
+| A11yToolbar | 无障碍工具条，辅助键盘/阅读器 | `src/components/CardPlugin/compound/components/A11yToolbar.tsx` |
+| Actions | 行为按钮集合（购买、收藏、加购等） | `src/components/CardPlugin/compound/components/Actions.tsx` |
+| Badge | 单个标签/角标 | `src/components/CardPlugin/compound/components/Badge.tsx` |
+| BadgeGroup | 标签分组显示 | `src/components/CardPlugin/compound/components/BadgeGroup.tsx` |
+| Brand | 品牌标识与信息 | `src/components/CardPlugin/compound/components/Brand.tsx` |
+| ColorSwatches | 颜色样例选择 | `src/components/CardPlugin/compound/components/ColorSwatches.tsx` |
+| CouponBar | 优惠/券信息栏 | `src/components/CardPlugin/compound/components/CouponBar.tsx` |
+| DeliveryTimeline | 配送时效/进度 | `src/components/CardPlugin/compound/components/DeliveryTimeline.tsx` |
+| Description | 商品文案描述 | `src/components/CardPlugin/compound/components/Description.tsx` |
+| Discount | 折扣信息展示 | `src/components/CardPlugin/compound/components/Discount.tsx` |
+| Divider | 分隔线 | `src/components/CardPlugin/compound/components/Divider.tsx` |
+| FeatureList | 特性/卖点列表 | `src/components/CardPlugin/compound/components/FeatureList.tsx` |
+| Image | 商品主图展示 | `src/components/CardPlugin/compound/components/Image.tsx` |
+| Inventory | 库存状态 | `src/components/CardPlugin/compound/components/Inventory.tsx` |
+| OldPrice | 原价显示 | `src/components/CardPlugin/compound/components/OldPrice.tsx` |
+| OptionPicker | 选项选择器（尺码/颜色等） | `src/components/CardPlugin/compound/components/OptionPicker.tsx` |
+| OrderSummaryPanel | 订单摘要面板 | `src/components/CardPlugin/compound/components/OrderSummaryPanel.tsx` |
+| Price | 当前价格 | `src/components/CardPlugin/compound/components/Price.tsx` |
+| PricePerUnit | 单位价格 | `src/components/CardPlugin/compound/components/PricePerUnit.tsx` |
+| QuantityStepper | 数量步进器 | `src/components/CardPlugin/compound/components/QuantityStepper.tsx` |
+| Rating | 评分展示 | `src/components/CardPlugin/compound/components/Rating.tsx` |
+| ReturnPolicy | 退换政策说明 | `src/components/CardPlugin/compound/components/ReturnPolicy.tsx` |
+| SKUCode | SKU 编码 | `src/components/CardPlugin/compound/components/SKUCode.tsx` |
+| SavingsBadge | 节省金额角标 | `src/components/CardPlugin/compound/components/SavingsBadge.tsx` |
+| Section | 区块容器 | `src/components/CardPlugin/compound/components/Section.tsx` |
+| SelectedInfo | 已选规格/信息 | `src/components/CardPlugin/compound/components/SelectedInfo.tsx` |
+| Shipping | 运费信息 | `src/components/CardPlugin/compound/components/Shipping.tsx` |
+| ShippingEstimator | 运费预估 | `src/components/CardPlugin/compound/components/ShippingEstimator.tsx` |
+| SizeSelector | 尺寸选择 | `src/components/CardPlugin/compound/components/SizeSelector.tsx` |
+| SpecsTable | 参数规格表 | `src/components/CardPlugin/compound/components/SpecsTable.tsx` |
+| StockBadge | 库存角标 | `src/components/CardPlugin/compound/components/StockBadge.tsx` |
+| Subtitle | 副标题 | `src/components/CardPlugin/compound/components/Subtitle.tsx` |
+| Tags | 标签集合 | `src/components/CardPlugin/compound/components/Tags.tsx` |
+| Title | 标题 | `src/components/CardPlugin/compound/components/Title.tsx` |
+| UpsellBundle | 加购/捆绑推荐 | `src/components/CardPlugin/compound/components/UpsellBundle.tsx` |
+| VariantMediaSwitcher | 变体媒体切换 | `src/components/CardPlugin/compound/components/VariantMediaSwitcher.tsx` |
+| VariantSelector | 变体选择 | `src/components/CardPlugin/compound/components/VariantSelector.tsx` |
+| Warranty | 质保信息 | `src/components/CardPlugin/compound/components/Warranty.tsx` |
 
-| 插件名                    | 说明                         |
-| ------------------------- | ---------------------------- |
-| `BadgePlugin`             | 角标/状态标记                |
-| `HoverPlugin`             | 悬停交互与预取               |
-| `AnimationPlugin`         | 卡片入场/交互动画            |
-| `SkeletonPlugin`          | 骨架屏与加载占位             |
-| `DominantColorPlugin`     | 主色背景占位                 |
-| `GalleryPlugin`           | 图集与灯箱                   |
-| `VideoPlugin`             | 视频播放与控制               |
-| `OverlayInfoPlugin`       | 信息蒙层与分区               |
-| `FilterPlugin`            | CSS 滤镜与高亮               |
-| `CaptionPlugin`           | 说明文字与可读性             |
-| `BorderGlowPlugin`        | 边框发光效果                 |
-| `ParallaxPlugin`          | 视差滚动                     |
-| `ResponsivePlugin`        | 响应式细节与布局             |
-| `A11yPlugin`              | 可访问性增强                 |
-| `ThemeTokenPlugin`        | 主题变量控制                 |
-
-### 分析与上报（10+）
-
-| 插件名                    | 说明                               |
-| ------------------------- | ---------------------------------- |
-| `AnalyticsPlugin`         | 曝光/可见性/点击/加购等事件上报    |
-| `PerformanceMonitorPlugin`| 性能指标采集与时序统计             |
-| `EventLoggerPlugin`       | 事件日志打印与上报                 |
-| `ScrollBehaviorPlugin`    | 滚动/驻留时长监控                  |
-| `NetworkAnalyticsPlugin`  | 网络事件与性能上报                 |
-| `ABTestPlugin`            | A/B 测试分配与数据采集             |
-| `FunnelTrackingPlugin`    | 转化漏斗统计                       |
-| `HeatmapAssistPlugin`     | 点击热力辅助（坐标采集）           |
-| `ErrorTrackingPlugin`     | 错误收集与聚合上报                 |
-| `CustomTransportPlugin`   | 自定义传输（HTTP/SDK/离线队列）    |
-
-### 稳健性与容错（10+）
-
-| 插件名                       | 说明                         |
-| ---------------------------- | ---------------------------- |
-| `RetryOnErrorPlugin`         | 错误重试与退避策略           |
-| `FallbackContentPlugin`      | 失败回退到备用内容           |
-| `OfflineStatePlugin`         | 离线占位与状态提示           |
-| `MemoryPressureAbortPlugin`  | 内存压力触发取消             |
-| `DecodeAfterIdlePlugin`      | 空闲后再解码/渲染            |
-| `AntiHotlinkPlugin`          | 防盗链策略                   |
-| `AuthGuardPlugin`            | 鉴权/携带 token 访问         |
-| `CDNFallbackPlugin`          | CDN 失败回退主源             |
-| `QoSAdaptivePlugin`          | 网络质量自适应策略           |
-| `CircuitBreakerPlugin`       | 熔断与降级处理               |
+> 复合组件入口：`src/components/CardPlugin/compound/ProductCard.tsx`，通过组合上述组件形成完整页面区块，适合作为业务页面的基础拼装单元。
 
 ---
 
@@ -608,41 +590,6 @@ export function createComparePricePlugin(config?: { order?: number }) {
 
 ---
 
-## 🧪 测试方案（扩展）
-
-### 单元测试
-
-- 插件排序与 `priceArea` 输出顺序一致性
-- 总线订阅/取消与资源释放（内存泄漏检测）
-- `AnalyticsPlugin` 上报口径与 payload 结构
-- 边界：无价格/无优惠/跨区税费等特殊数据
-
-### 集成测试
-
-- 容器与插件组合在典型场景下的渲染与交互
-- 事件串联：SKU 切换 → 价格更新 → 上报 → UI 反馈
-
-### 端到端测试
-
-- 关键交互路径：加购、切换规格、查看物流、领取优惠
-- 可视化验证：Chip 风格一致性与动效阈值
-
----
-
-## 🔄 迁移指南
-
-### 从早期版本迁移
-
-- 统一 `renderPriceArea` 为主展示插槽，避免重复定义
-- 短路调用替换为显式 `if`，避免 ESLint `no-unused-expressions`
-- 插件排序统一由 `config.order` 控制，清理硬编码排序逻辑
-
-### 变更清单（示例）
-
-- 移除重复的 `renderPriceArea` 实现（如 `CouponRecommendPlugin`）
-- 修复分析插件短路调用，改为 `if (condition) fn()`
-
----
 
 ## 🔐 安全与合规（建议）
 
@@ -786,102 +733,7 @@ export default [
 
 ---
 
-## 📎 附录 F：插件配置参考大全（扩展）
-
-> 为了便于按需组合与工程落地，这里列出常见插件的配置项示例。实际以源码与注释为准。
-
-### 价格与优惠类
-
-- `PriceCalculatorPlugin`
-  - `currency?: string`
-  - `precision?: number`（默认 2）
-  - `format?: (n: number) => string`
-  - `showCents?: boolean`
-  - `order?: number`（默认 10）
-
-- `ComparePricePlugin`
-  - `showPercent?: boolean`（默认 true）
-  - `label?: string`（默认“省”）
-  - `chipStyle?: React.CSSProperties`
-  - `order?: number`（默认 20）
-
-- `CouponPlugin`
-  - `source?: "api" | "local"`
-  - `maxShown?: number`（默认 2）
-  - `showIcon?: boolean`（默认 true）
-  - `order?: number`（默认 25）
-
-- `CouponRecommendPlugin`
-  - `strategy?: "best-discount" | "lowest-price"`
-  - `showWhy?: boolean`
-  - `order?: number`（默认 30）
-
-- `InstallmentPlugin`
-  - `months?: number[]`（如 [3, 6, 12]）
-  - `interestFree?: boolean`
-  - `label?: string`（默认“分期”）
-  - `order?: number`（默认 40）
-
-- `MemberPricePlugin`
-  - `level?: "silver" | "gold" | "platinum"`
-  - `showBadge?: boolean`
-  - `order?: number`（默认 50）
-
-### 库存与物流类
-
-- `InventoryPlugin`
-  - `lowStockThreshold?: number`（默认 5）
-  - `soldOutLabel?: string`（默认“售罄”）
-  - `order?: number`（默认 10）
-
-- `LogisticsETAPlugin`
-  - `format?: (days: number) => string`
-  - `riskAware?: boolean`（天气/节假日）
-  - `order?: number`（默认 20）
-
-- `ShippingPricePlugin`
-  - `freeThreshold?: number`
-  - `regionAware?: boolean`
-  - `order?: number`（默认 30）
-
-### 视觉与交互类
-
-- `BadgePlugin`
-  - `type?: "hot" | "new" | "sale" | "limited"`
-  - `text?: string`
-  - `corner?: "top-left" | "top-right"`
-  - `order?: number`（默认 10）
-
-- `HoverPlugin`
-  - `prefetch?: boolean`（悬停预取）
-  - `hoverScale?: number`（默认 1.02）
-  - `order?: number`（默认 20）
-
-- `AnimationPlugin`
-  - `enterDuration?: number`（默认 180ms）
-  - `hoverDuration?: number`（默认 160ms）
-  - `easing?: string`（默认 `ease-out`）
-  - `order?: number`（默认 30）
-
-### 分析与上报类
-
-- `AnalyticsPlugin`
-  - `minExposureMs?: number`（默认 600）
-  - `transport?: (payload: any) => Promise<void>`
-  - `includePayload?: (ctx: PluginContext) => Record<string, any>`
-  - `order?: number`（默认 999）
-
-### 稳健性与容错类
-
-- `RetryOnErrorPlugin`
-  - `maxRetries?: number`（默认 3）
-  - `retryDelay?: number`（默认 1000ms）
-  - `strategy?: "linear" | "exponential"`（默认 exponential）
-  - `order?: number`（默认 999）
-
----
-
-## 📎 附录 G：示例代码合集（多场景）
+## 📎 附录 F：示例代码合集（多场景）
 
 ### 1. 基础卡片 + 价格区组合
 
@@ -996,7 +848,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 H：事件总线事件字典（建议）
+## 📎 附录 G：事件总线事件字典（建议）
 
 - `sku:change`：规格变更
 - `price:change`：价格变更
@@ -1019,7 +871,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 I：主题变量清单（扩展）
+## 📎 附录 H：主题变量清单（扩展）
 
 ```css
 :root {
@@ -1044,20 +896,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 J：测试用例清单（扩展）
-
-- 价格：无 comparePrice / comparePrice < price / currency 为空
-- 优惠：无券 / 多券 / 叠加规则冲突 / 推荐策略变化
-- 库存：充足 / 低库存 / 售罄 / 预售
-- 物流：跨区 / 节假日 / 天气影响 / ETA 模糊
-- 视觉：角标叠层 / 悬停预取 / 动效冲突 / 响应式变化
-- 分析：曝光阈值 / 点击漏斗 / 加购上报 / 可见性抖动
-- 稳健：错误重试 / 回退启用 / 离线状态 / 鉴权失败
-- 总线：多事件串联 / 订阅释放 / 负载边界 / 异常路径
-
----
-
-## 📎 附录 K：FAQ 扩展集（部分）
+## 📎 附录 I：FAQ 扩展集（部分）
 
 **Q：如何避免插件之间的视觉冲突？**
 - A：统一 Chip 风格与间距；在 `order` 控制排序，强调信息靠前。
@@ -1076,7 +915,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 L：价格策略案例库（参考）
+## 📎 附录 J：价格策略案例库（参考）
 
 - 案例 1：基础价 + 对比价 + 优惠券叠加 → 显示折扣百分比 Chip
 - 案例 2：会员价优先显示，非会员展示“升级会员更优惠”提示
@@ -1101,7 +940,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 M：上报 Payload 规范示例
+## 📎 附录 K：上报 Payload 规范示例
 
 ```json
 {
@@ -1166,7 +1005,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 N：路由与页面映射表（扩展）
+## 📎 附录 L：路由与页面映射表（扩展）
 
 | 路由               | 组件文件                                   | 说明                   |
 | ------------------ | ------------------------------------------ | ---------------------- |
@@ -1190,7 +1029,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 O：贡献指南（简版）
+## 📎 附录 M：贡献指南（简版）
 
 1. Fork 仓库并创建分支（命名：`feat/*`、`fix/*`、`docs/*`）
 2. 按规范编写代码与文档，确保 ESLint/TS 校验通过
@@ -1199,7 +1038,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 P：术语表（Glossary）
+## 📎 附录 N：术语表（Glossary）
 
 - 插槽（Slot）：预留的渲染区域，如 `priceArea`、`Header`、`Footer`。
 - 生命周期（Lifecycle）：插件的运行时钩子，如 `onMount`、`onVisibilityChange`。
@@ -1209,7 +1048,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 Q：FAQ 扩展（更多场景）
+## 📎 附录 O：FAQ 扩展（更多场景）
 
 **Q：如何在极端低网速下保证关键信息可见？**
 - A：采用骨架屏与占位信息；非关键插件延迟加载或动态导入。
@@ -1267,7 +1106,7 @@ const ProductCard = withPlugins(CardCore, {
 
 ---
 
-## 📎 附录 R：示例数据批量列表（片段）
+## 📎 附录 P：示例数据批量列表（片段）
 
 ```ts
 export const demoProducts = [
@@ -1317,7 +1156,7 @@ export const demoProducts = [
 
 ---
 
-## 📎 附录 S：更多实践建议
+## 📎 附录 Q：更多实践建议
 
 - 将 `AnalyticsPlugin` 的 `transport` 抽象为接口，便于接入不同埋点平台。
 - 为 `priceArea` 定义可复用的 Chip 组件，集中维护风格与状态。
