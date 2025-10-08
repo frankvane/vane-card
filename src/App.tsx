@@ -32,6 +32,7 @@ import PluginEnhancedCompound from "./pages/CardPlugin/compound/layouts/PluginEn
 import PriceLabelsDemo from "./pages/CardPlugin/compound/ui-display/PriceLabelsDemo";
 import QuantityStepperDemo from "./pages/CardPlugin/compound/controls/QuantityStepperDemo";
 import React from "react";
+import ReadmeDemo from "./pages/CardPlugin/ReadmeDemo";
 import ResponsiveSlots from "./pages/CardPlugin/slots/ResponsiveSlots";
 import ReturnPolicyDemo from "./pages/CardPlugin/compound/logistics/ReturnPolicyDemo";
 import RightImageLayout from "./pages/CardPlugin/layouts/RightImageLayout";
@@ -50,7 +51,6 @@ import VariantSelectorDemo from "./pages/CardPlugin/compound/controls/VariantSel
 import VariantSelectorMediaComboDemo from "./pages/CardPlugin/compound/controls/VariantSelectorMediaComboDemo";
 import VariantSelectorPriceInventoryDemo from "./pages/CardPlugin/compound/controls/VariantSelectorPriceInventoryDemo";
 import VerticalLayout from "./pages/CardPlugin/layouts/VerticalLayout";
-import ReadmeDemo from "./pages/CardPlugin/ReadmeDemo";
 
 const App: React.FC = () => {
   return (
