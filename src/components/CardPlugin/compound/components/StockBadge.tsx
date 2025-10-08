@@ -30,13 +30,24 @@ export const StockBadge: React.FC<StockBadgeProps> = ({
 }) => {
   const { data, state } = useProductCard();
 
+  // 根据当前 attributes 与 data.variants 匹配选中变体
+  const getActiveVariant = (): any | undefined => {
+    const attrs = state.attributes || {};
+    const variants: any[] | undefined = (data?.variants && Array.isArray(data.variants)) ? data.variants : undefined;
+    if (!variants || !Object.keys(attrs).length) return undefined;
+    return variants.find((v) => {
+      const opts = (v.options || v.attributes) || {};
+      return Object.keys(attrs).every((k) => String(opts[k]) === String((attrs as any)[k]));
+    });
+  };
+
   // 获取当前选中规格的库存
   const getCurrentStock = () => {
-    const selectedSKU = state.selectedSKU;
-    if (selectedSKU && selectedSKU.stock !== undefined) {
-      return selectedSKU.stock;
+    const selected = getActiveVariant();
+    if (selected && selected.stock !== undefined) {
+      return selected.stock as number;
     }
-    return data?.inventory ?? 0;
+    return (data?.inventory as number | undefined) ?? 0;
   };
 
   const currentStock = getCurrentStock();

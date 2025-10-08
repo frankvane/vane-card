@@ -41,7 +41,7 @@ export const VariantMediaSwitcher: React.FC<VariantMediaSwitcherProps> = ({
   // 当选中规格变化时，取消手动覆盖，跟随规格主图
   React.useEffect(() => {
     setManualUrl(null);
-  }, [state.selectedSKU]);
+  }, [state.attributes]);
 
   // 推导主图 URL
   const mainUrl = React.useMemo(() => {
@@ -49,22 +49,30 @@ export const VariantMediaSwitcher: React.FC<VariantMediaSwitcherProps> = ({
 
     let url: string | undefined;
     // 1) 根据选中规格计算
+    const attrs = state.attributes || {};
+    const variants: any[] | undefined = (data?.variants && Array.isArray(data.variants)) ? data.variants : undefined;
+    const selected = variants && Object.keys(attrs).length
+      ? variants.find((v) => {
+          const opts = (v.options || v.attributes) || {};
+          return Object.keys(attrs).every((k) => String(opts[k]) === String((attrs as any)[k]));
+        })
+      : undefined;
+
     if (!url && getImageForSelected) {
-      url = getImageForSelected(state.selectedSKU, data);
+      url = getImageForSelected(selected, data);
     }
-    // 2) 选中规格上是否自带 image/media 字段
+    // 2) 选中变体自身的 image/media 字段
     if (!url) {
-      const selected = state.selectedSKU as any;
-      url = selected?.image || selected?.media || undefined;
+      url = (selected as any)?.image || (selected as any)?.media || undefined;
     }
     // 3) 若传入了 variantImages 且 id 匹配 sku，则采用
-    if (!url && state.selectedSKU?.sku && Array.isArray(variantImages)) {
-      const match = variantImages.find(v => v.id && v.id === state.selectedSKU?.sku);
+    if (!url && (selected as any)?.sku && Array.isArray(variantImages)) {
+      const match = variantImages.find(v => v.id && v.id === (selected as any)?.sku);
       if (match) url = match.url;
     }
     // 4) 回退到 props.images 或商品主图
     return url || (images?.[0] ?? (data?.image as string | undefined) ?? "");
-  }, [manualUrl, getImageForSelected, state.selectedSKU, images, variantImages, data?.image]);
+  }, [manualUrl, getImageForSelected, state.attributes, images, variantImages, data?.image]);
 
   // 通知外部主图变化
   React.useEffect(() => {
