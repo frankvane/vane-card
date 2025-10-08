@@ -8,7 +8,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.x-blue)](https://reactjs.org/)
 
-[[在线演示](https://chinavane.netlify.app/)](#路由与页面) | [快速开始](#-快速开始) | [插件系统](#-插件系统) | [API 文档](#-api-文档) | [开发指南](#-开发指南)
+[[在线演示](https://chinavane.netlify.app/)]| [路由与页面](#-路由与页面) | [快速开始](#-快速开始) | [插件系统](#-插件系统) | [API 文档](#-api-文档) | [开发指南](#-开发指南)
 
 ---
 
