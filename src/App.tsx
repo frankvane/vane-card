@@ -51,6 +51,8 @@ import VariantSelectorDemo from "./pages/CardPlugin/compound/controls/VariantSel
 import VariantSelectorMediaComboDemo from "./pages/CardPlugin/compound/controls/VariantSelectorMediaComboDemo";
 import VariantSelectorPriceInventoryDemo from "./pages/CardPlugin/compound/controls/VariantSelectorPriceInventoryDemo";
 import VerticalLayout from "./pages/CardPlugin/layouts/VerticalLayout";
+import WatermarkDemo from "./pages/CardPlugin/combine/WatermarkDemo";
+import WaterfallBasicDemo from "./pages/CardPlugin/combine/BasicDemo";
 
 const App: React.FC = () => {
   return (
@@ -167,6 +169,12 @@ const App: React.FC = () => {
             <NavLink to="/slots/footer-actions">Footer Actions</NavLink>
             <NavLink to="/slots/gallery-video">Gallery + Video</NavLink>
             <NavLink to="/slots/responsive">Responsive</NavLink>
+          </div>
+
+          <h3 style={{ marginTop: 12 }}>整合示例</h3>
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <NavLink to="/combine/watermark">LazyImage + 水印</NavLink>
+            <NavLink to="/combine/waterfall-basic">Waterfall 基础</NavLink>
           </div>
 
 
@@ -317,6 +325,13 @@ const App: React.FC = () => {
           />
           <Route path="/compound/a11y/toolbar" element={<A11yToolbarDemo />} />
           <Route path="/compound/a11y/actions" element={<ActionsDemo />} />
+
+          {/* 整合示例路由 */}
+          <Route path="/combine/watermark" element={<WatermarkDemo />} />
+          <Route
+            path="/combine/waterfall-basic"
+            element={<WaterfallBasicDemo />}
+          />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

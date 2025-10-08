@@ -64,6 +64,8 @@ const routeToFileMap: Record<string, string> = {
   "/compound/commerce-combo/order-summary": "compound/commerce-combo/OrderSummaryDemo",
   "/slots/responsive": "slots/ResponsiveSlots",
   "/slots/gallery-video": "slots/GalleryVideoSlots",
+  "/combine/watermark": "combine/WatermarkDemo",
+  "/combine/waterfall-basic": "combine/BasicDemo",
 };
 
 // 通过显式的动态导入映射，确保 Vite 能正确打包这些原文件的 raw 文本
@@ -147,6 +149,8 @@ const fileLoaderMap: Record<string, () => Promise<{ default: string }>> = {
     import("../compound/commerce-combo/OrderSummaryDemo.tsx?raw"),
   "slots/ResponsiveSlots": () => import("../slots/ResponsiveSlots.tsx?raw"),
   "slots/GalleryVideoSlots": () => import("../slots/GalleryVideoSlots.tsx?raw"),
+  "combine/WatermarkDemo": () => import("../combine/WatermarkDemo.tsx?raw"),
+  "combine/BasicDemo": () => import("../combine/BasicDemo.tsx?raw"),
 };
 
 const DemoPage: React.FC<DemoPageProps> = ({

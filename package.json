@@ -60,7 +60,8 @@
     "react-syntax-highlighter": "^15.6.6",
     "remark-gfm": "^4.0.1",
     "vane-card": "^1.0.7",
-    "vane-lazy-image": "^1.0.14"
+    "vane-lazy-image": "^1.0.14",
+    "vane-waterfall": "^1.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
