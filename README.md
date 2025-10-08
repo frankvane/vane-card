@@ -2,7 +2,13 @@
 
 一个可扩展的电商产品卡组件方案：以「卡片容器 + 插件系统 + 插槽区域」为核心，通过复合组件语法和插件增强能力，快速搭建价格、优惠、比价、库存、物流、可访问性、分析上报等场景。
 
-[在线演示（本项目）](#路由与页面) | [快速开始](#-快速开始) | [插件系统](#-插件系统) | [API 文档](#-api-文档) | [开发指南](#-开发指南)
+
+[![NPM Version](https://img.shields.io/badge/npm-v1.0.9-blue)](https://www.npmjs.com/package/vane-card)
+[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18.x-blue)](https://reactjs.org/)
+
+[[在线演示](https://chinavane.netlify.app/)](#路由与页面) | [快速开始](#-快速开始) | [插件系统](#-插件系统) | [API 文档](#-api-文档) | [开发指南](#-开发指南)
 
 ---
 
@@ -1162,3 +1168,31 @@ export const demoProducts = [
 - 为 `priceArea` 定义可复用的 Chip 组件，集中维护风格与状态。
 - 引入 `visualizer` 或 Bundle 分析工具，监控依赖与按需导入效果。
 - 在演示页面使用 `ReactMarkdown` 渲染 README，保证文档与演示一致性。
+
+---
+
+## 📄 许可证
+
+[MIT License](./LICENSE) © 2025 Frank Vane
+
+---
+
+## 🔗 相关链接
+
+- [GitHub 仓库](https://github.com/frankvane/vane-card)
+- [NPM 包](https://www.npmjs.com/package/vane-card)
+- [在线演示](https://chinavane.netlify.app/)
+- [问题反馈](https://github.com/frankvane/vane-card/issues)
+- [更新日志](./CHANGELOG.md)
+
+---
+
+## 🙏 致谢
+
+感谢所有为这个项目做出贡献的开发者！
+
+如果这个项目对您有帮助，欢迎 ⭐ Star 支持！
+
+---
+
+Made with ❤️ by Frank Vane
