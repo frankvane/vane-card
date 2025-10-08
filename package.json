@@ -1,6 +1,6 @@
 {
   "name": "vane-card",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "vane-card",
   "type": "module",
   "main": "dist/index.umd.js",
