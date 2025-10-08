@@ -1,5 +1,5 @@
 import DemoPage from "../../_layout/DemoPage";
-import { ProductCard } from  "../../../../components/CardPlugin";
+import { ProductCard } from  "vane-card";
 import React from "react";
 
 const demoProduct = {

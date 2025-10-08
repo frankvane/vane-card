@@ -1,9 +1,10 @@
-import React from "react";
-import DemoPage from "../../_layout/DemoPage";
 import {
   ProductCard,
   createQuantityPlugin,
-} from "../../../../components/CardPlugin";
+} from "vane-card";
+
+import DemoPage from "../../_layout/DemoPage";
+import React from "react";
 
 const productData = {
   id: "coupon-bar-demo",

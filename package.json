@@ -59,6 +59,7 @@
     "react-router-dom": "^7.9.3",
     "react-syntax-highlighter": "^15.6.6",
     "remark-gfm": "^4.0.1",
+    "vane-card": "^1.0.7",
     "vane-lazy-image": "^1.0.14"
   },
   "devDependencies": {

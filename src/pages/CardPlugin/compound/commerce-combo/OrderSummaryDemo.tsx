@@ -3,11 +3,11 @@ import {
   createPriceCalculatorPlugin,
   createQuantityPlugin,
   createSKUPlugin,
-} from "../../../../components/CardPlugin";
+} from "vane-card";
 import React, { useState } from "react";
 
 import DemoPage from "../../_layout/DemoPage";
-import type { OrderSummary } from "../../../../components/CardPlugin";
+import type { OrderSummary } from "vane-card";
 
 const productData = {
   id: "order-summary-demo",

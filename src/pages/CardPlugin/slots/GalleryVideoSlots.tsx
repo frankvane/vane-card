@@ -2,16 +2,17 @@
  * 插槽示例：Gallery + Video（头部画廊与视频预览）
  */
 
-import React from "react";
-import DemoPage from "../_layout/DemoPage";
 import {
   CardCore,
-  withPlugins,
+  createActionsPlugin,
   createGalleryPlugin,
   createHoverPlugin,
   createStatePlugin,
-  createActionsPlugin,
-} from "../../../components/CardPlugin";
+  withPlugins,
+} from "vane-card";
+
+import DemoPage from "../_layout/DemoPage";
+import React from "react";
 
 interface ProductData {
   id: string;

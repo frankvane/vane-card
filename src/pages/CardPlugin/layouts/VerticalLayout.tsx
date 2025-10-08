@@ -11,7 +11,7 @@ import {
   createImagePlugin,
   createStatePlugin,
   withPlugins,
-} from "../../../components/CardPlugin";
+} from "vane-card";
 
 import DemoPage from "../_layout/DemoPage";
 import React from "react";

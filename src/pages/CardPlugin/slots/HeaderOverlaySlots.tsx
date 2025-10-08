@@ -11,7 +11,7 @@ import {
   withPlugins,
   type CardPlugin,
   type CardPluginContext,
-} from "../../../components/CardPlugin";
+} from "vane-card";
 
 interface ProductData {
   id: string;

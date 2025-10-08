@@ -1,4 +1,4 @@
-import { ProductCard, createSKUPlugin } from "../../../../components/CardPlugin";
+import { ProductCard, createSKUPlugin } from "vane-card";
 
 import DemoPage from "../../_layout/DemoPage";
 import React from "react";

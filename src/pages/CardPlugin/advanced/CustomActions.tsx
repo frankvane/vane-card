@@ -12,7 +12,7 @@ import {
   createStatePlugin,
   withPlugins,
   type CardPluginContext,
-} from "../../../components/CardPlugin";
+} from "vane-card";
 
 const Card = withPlugins(CardCore, {
   plugins: [

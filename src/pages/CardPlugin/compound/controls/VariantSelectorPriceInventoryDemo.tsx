@@ -1,6 +1,6 @@
-import React from "react";
 import DemoPage from "../../_layout/DemoPage";
-import { ProductCard } from "../../../../components/CardPlugin";
+import { ProductCard } from "vane-card";
+import React from "react";
 
 const product = {
   id: "ctrl-variant-price-inv-01",
